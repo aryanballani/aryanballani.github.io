@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+}
+
+li, a, button {
+    font-family: Anta;
+    font-weight: 400;
+    font-size: 16px;
+    color: rgb(241, 228, 88);
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 10px 10px 10px;
+    background-color: rgb(74, 74, 74);
+}
+
+  
+.logo {    
+    /* background-color: aliceblue; */
+    cursor: pointer;
+    height: 40px;
+    width: 400px;
+    margin-right: auto;
+    margin-left: -90px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.logo img {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+}
+
+.logo h1 {
+    font-family: Anta;
+    font-weight: 400;
+    height: 100%;
+    width: 100%;
+    color: rgb(241, 228, 88);
+    margin-left: -75px;
+    align-self: center;
+}
+
+.navbar {
+    list-style: none;
+}
+
+.navbar li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.navbar li a{
+    transition: all 0.3s ease 0s;
+}
+
+.navbar li a:hover{
+    color:  black;
+    background-color: rgb(241, 228, 88);
+}
+
+button {
+    padding: 9px 25px;
+    background-color: rgb(241, 228, 88, 1);
+    border: none;
+    border-radius: 50px;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    color: black;
+}
+
+button:hover {
+    background-color: rgb(241, 228, 88, 0.8);
+}
