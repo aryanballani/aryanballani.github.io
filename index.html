@@ -4,13 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="style.css" /> 
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://kit.fontawesome.com/63f8eab972.js" crossorigin="anonymous">
+        window.addEventListener('DOMContentLoaded', (event) => {
+            // Select all anchor tags
+            const links = document.querySelectorAll('a');
+            
+            // Loop through each anchor tag
+            links.forEach(link => {
+                // Add target="_blank" attribute
+                link.setAttribute('target', '_blank');
+            });
+        });
+    </script>
     <title>Personal Website</title>
 </head>
+
 <body>
     <header>
         <div class="logo">
-            <img  src="images/nav-logo.svg" alt="Logo">
+            <img  src="images/nav-logo2.svg" alt="Logo">
             <h1><B>Aryan Ballani</B></h1>
         </div>
         <nav>
@@ -21,8 +34,107 @@
                 <li><a href="#contact">Contact</a></li>   
             </ul>
         </nav>
-        <a href="resume/ResumeW3T2Comp.pdf" id="cv"><button>Download Resume</button></a>
+        <a href="resume/ResumeW3T2Comp.pdf" id="cv" target="_blank"><button>Download Resume</button></a>
     </header>
+
+
+    <main>
+        <!-- ------------------------About--------------- -->
+        <div id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="about-col-1">
+                        <div class="heading">
+                            <h1>About</h1>
+                        </div>
+                        <div class="tab-contents" id = "experience">
+                            <ul>
+                                <li><span>Jan. 2022 - Apr. 2022</span><br>Software Developer Volunteer at <a href="http://infiniai.tech">InfiniAI</a></li>
+                                <li><span>Oct. 2022 - Sep. 2023</span><br>Catering Associate at Nest Catering and Conference Services</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="about-col-2">
+                        <div class="heading">
+                            <h1>Skills</h1>
+                        </div>
+                        <div class="tab-contents active-tab" id = "skills">
+                            <div class = "skills">
+                                <div><a href = "https://www.python.org" target="_blank"><img src = "images/python.svg"></a></div>
+                                <div><a href = "https://www.java.com/en/" target="_blank"><img src = "images/java.svg"></a></div>
+                                <div><a href = "https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_TypeScript#typescript_optional_static_typing_for_javascript" target="_blank"><img src = "images/typescript.svg"></a></div>
+                                <div><a href = "https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"><img src = "images/javascript.svg"></a></div>
+                                <div><a href ="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/" target="_blank"><img src = "images/c-sharp-c.svg"></a></div>
+                                <div><a href = "https://cplusplus.com" target="_blank"><img src = "images/c-plusplus.svg"></a></div>
+                                <div><a href = "https://en.wikipedia.org/wiki/HTML" target="_blank"><img src = "images/html-5.svg"></a></div>
+                                <div><a href = "https://en.wikipedia.org/wiki/CSS" target="_blank"><img src = "images/css-3.svg"></a></div>
+                                <div><a href = "https://www.r-project.org" target="_blank"><img src = "images/r-letter.svg"></a></div>
+                                <div><a href = "https://git-scm.com/" target="_blank"><img src = "images/git.svg"></a></div>
+                                <div><a href = "https://en.wikipedia.org/wiki/SQL" target="_blank"><img src = "images/sql.svg"></a></div>
+                                <div><a href = "https://en.wikipedia.org/wiki/Docker_(software)" target="_blank"><img src = "images/docker.svg"></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects display -->
+        <div id="projects">
+            <div class="heading">
+                <h1>My Projects</h1>
+            </div>
+            <div class="project-box">
+                <div class="wrapper">
+                    <div class="content"><a href="#">
+                        <h2>MovieTime App</h2>
+                        <p> Users can effortlessly organize their movie-related data by adding or
+                             removing films from watchlists and favorites, while also marking movies as watched. Application focuses on 
+                             giving user a personalized experience.
+                            <li>Dynamic GUI for Personalized Management</li>
+                            <li>User-Friendly Data Manipulation</li>
+                            <li>Json for Local Data Storage</li>
+                        </p>
+                    </div>
+                    <i class="fa-brands fa-java fa-10x"></i>
+                </a></div>
+                <div class="wrapper">
+                    <div class="content"><a href="#">
+                        <h2>Campus Capture</h2>
+                        <p> This project empowers users to design queries for parsing and gaining insights 
+                            from a dataset related to UBC courses.
+                            <li>Optimized Data Handling with Async Calls</li>
+                            <li>Enhanced Data Retrieval with parse5, fs-extra, and JSZip</li>
+                            <li>Rigorous Testing for System Reliability and RESTful API Design</li>
+                        </p>
+                    </div>
+                    <i class="fa-brands fa-js fa-10x"></i>
+                </a></div>
+                <div class="wrapper">
+                    <div class="content"><a href="#">
+                        <h2>Bookstore Management</h2>
+                        <p> A specialized database management system has been developed for a bookstore, streamlining inventory organization and supporting additional services such as book issuance and returns.
+                            <li>Comprehensive System for Efficient Book Inventory Management</li>
+                            <li>Seamless Integration with MySQL for Robust Database</li>
+                        </p>
+                    </div>
+                    <i class="fa-brands fa-python fa-10x"></i>
+                </a></div>
+                <div class="wrapper">
+                    <div class="content"><a href="#">
+                        <h2>2048-Game</h2>
+                        <p> A console-based user interface application (Phase 1) is in development for the renowned online game, 2048.
+                            <li>Adherence to Software Engineering Design Principles</li>
+                            <li>Leveraging NumPy for Desired Behavior</li>
+                            <li>Virtual Environment for Accessibility and ReadMe.md Instructions</li>
+                            <p>Phase 2 is underway, focusing on developing a Graphical User Interface for an enhanced gaming experience.</p>
+                        </p>
+                    </div>
+                    <i class="fa-brands fa-python fa-10x"></i>
+                </a></div>
+            </div>
+        </div>
+    </main>
    
 </body>
 </html>
