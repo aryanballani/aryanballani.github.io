@@ -259,7 +259,7 @@ main {
 
 .wrapper {
     position: relative;
-    overflow:visible;
+    overflow:hidden;
     border-radius: 10px;
     transition: background-color 0.8s, transform 0.8s;
 }
@@ -286,12 +286,15 @@ main {
 
 .wrapper .fa-brands {
     position: absolute;
+    width: 70%;
+    height: 70%;
     inset: 0;
-    margin-right: 25px;
+    margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
+    object-fit: contain;
 }
 
 .wrapper .content
