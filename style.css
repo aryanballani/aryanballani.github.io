@@ -111,6 +111,9 @@ main {
 }
 
 #about{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 80px 40px;
 }
 
@@ -122,6 +125,34 @@ main {
     vertical-align: middle;
     /* color: #ADA33B; */
 }
+
+
+.about-content {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+}
+
+.column {
+    flex: 1;
+}
+
+.column p {
+    margin: 20px 50px;
+    font-size: 20px;
+    color: #ababab;
+    text-align:center; 
+    vertical-align: middle;
+    /* color: #ADA33B; */
+}
+
+.profile_pic {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 
 .profile_pic{
     border-radius: 50%; 
@@ -314,4 +345,72 @@ main {
 
 .wrapper:hover .fa-brands {
     opacity: 1;
+}
+
+
+/* Media Queries */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo {
+        margin-left: 10px;
+    }
+
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        padding-left: 10px;
+    }
+
+    .navbar li {
+        padding: 10px 0;
+    }
+
+    .skills {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .profile_pic {
+        max-width: 50%;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo img {
+        width: 150px;
+    }
+
+    .logo h1 {
+        font-size: 16px;
+    }
+
+    .profile_pic {
+        max-width: 60%;
+    }
+
+    .skills {
+        grid-template-columns: 1fr;
+    }
+
+    .wrapper .content {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .project-box {
+        grid-template-columns: 1fr;
+    }
 }
