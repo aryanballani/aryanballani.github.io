@@ -194,7 +194,10 @@ main {
 /* ------------------Skills and XP________________ */
 
 #experience{
-    padding: 80px 40px;
+    padding-top: 80px;
+    padding-left: -100px;
+    padding-bottom: 80px;
+    padding-right: 40px;
 }
 
 .about-col-2 img{
@@ -202,9 +205,15 @@ main {
     border-radius: 15px;
 }
 
+.about-col-1 {
+    /* background-color: rgb(96, 118, 137);  */
+    float: left;
+}
+
 .row {
+    /* background-color: rgb(173, 163, 59); */
     display: grid;
-    grid-template-columns: 0.8fr 1fr;
+    grid-template-columns: 0.6fr 1fr;
 }
 
 .tab-contents li{
@@ -347,70 +356,37 @@ main {
     opacity: 1;
 }
 
-
-/* Media Queries */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .logo {
-        margin-left: 10px;
-    }
-
-    .navbar {
-        display: flex;
-        flex-direction: column;
-        padding-left: 10px;
-    }
-
-    .navbar li {
-        padding: 10px 0;
-    }
-
-    .skills {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .profile_pic {
-        max-width: 50%;
-    }
-
-    .row {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    button {
-        padding: 10px 20px;
-        font-size: 14px;
-    }
+/* Modal container, hidden by default */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-@media (max-width: 480px) {
-    .logo img {
-        width: 150px;
-    }
+/* Modal content box */
+.modal-content {
+    background-color: rgb(0, 0, 0);
+    padding: 20px;
+    border-radius: 8px;
+    width: 60%;
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+}
 
-    .logo h1 {
-        font-size: 16px;
-    }
-
-    .profile_pic {
-        max-width: 60%;
-    }
-
-    .skills {
-        grid-template-columns: 1fr;
-    }
-
-    .wrapper .content {
-        padding: 10px;
-        font-size: 12px;
-    }
-
-    .project-box {
-        grid-template-columns: 1fr;
-    }
+/* Close button styling */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
 }

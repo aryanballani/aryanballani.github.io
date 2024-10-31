@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <script src="https://kit.fontawesome.com/63f8eab972.js" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/63f8eab972.js" crossorigin="anonymous"></script>
+    <script>
         window.addEventListener('DOMContentLoaded', (event) => {
             // Select all anchor tags
             const links = document.querySelectorAll('a');
@@ -16,6 +17,15 @@
                 link.setAttribute('target', '_blank');
             });
         });
+
+        function openModal() {
+            document.getElementById("modal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+
     </script>
     <title>Personal Website</title>
 </head>
@@ -49,7 +59,7 @@
                         <h1>XP++</h1>
                     </div>
                     <div class="tab-contents">
-                        <div class="work-xp">
+                        <div class="work-xp" >
                             <div>
                                 <div style="display: flex; align-items: center;">
                                     <div class="company-icon" style="background-color: #2563EB;">BCLDB</div>
@@ -87,9 +97,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <div class="filler"></div> -->
-
                 <div class="about-col-2">
                     <div class="heading">
                         <h1>Skills</h1>
@@ -111,7 +118,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -187,7 +193,7 @@
                     <img class="fa-brands" src="images/vue.svg">
                 </a></div>
                 <div class="wrapper">
-                    <div class="content"><a href="https://github.com/aryanballani/WineClassification">
+                    <div class="content"><a href="https://github.com/aryanballani/WineClassification"  target="_blank">
                         <h2>Wine Quality Classification Model</h2>
                             <p>Constructed a classification model to predict wine quality using over 6000 observations.
                                 <li>Utilized R, Jupyter, tidyverse, and GGally for ETL and model building</li>
@@ -197,7 +203,7 @@
                     <img class="fa-brands" src="images/jupyterlab.svg">
                 </a></div>
                 <div class="wrapper">
-                    <div class="content"><a href="https://github.com/kashish1928/NYC-Airbnb-Regression-Analysis">
+                    <div class="content"><a href="https://github.com/kashish1928/NYC-Airbnb-Regression-Analysis"  target="_blank">
                         <h2>NYC Airbnb Regression Analysis</h2>
                             <p>Performed an in-depth regression analysis on NYC Airbnb data to optimize model performance.
                                 <li>Utilized R and ggplot2 for EDA, addressing multicollinearity by dropping redundant features</li>
@@ -207,7 +213,7 @@
                     <img class="fa-brands" src="images/r-letter.svg">
                 </a></div>
                 <div class="wrapper">
-                    <div class="content"><a href="#">
+                    <div class="content"><a href="https://github.com/aryanballani/WasteNet-Mobile-App"  target="_blank">
                         <h2>WasteNet</h2>
                             <p>This mobile app minimizes food waste by helping users manage their food inventories and suggests recipes based on available ingredients.
                                 <li>Built with React Native, Flask, and Python</li>
@@ -217,8 +223,10 @@
                     </div>
                     <img class="fa-brands" src="images/react-native.svg">
                 </a></div>
-                <div class="wrapper">
-                    <div class="content"><a href="#">
+
+
+                <div class="wrapper" onclick=openModal()>
+                    <div class="content">
                         <h2>Dep2Phrase</h2>
                             <p>Collaborative project analyzing dependency and constituency structures for language translation applications.
                                 <li>Utilized NLP techniques, Python, and NLTK trees with the Penn Tree Bank dataset</li>
@@ -227,7 +235,15 @@
                             </p>
                     </div>
                     <img class="fa-brands" src="images/python.svg">
-                </a></div>
+                </div>
+                <div id="modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick=closeModal()>&times;</span>
+                        <h2 >Project currently in a private repository. <br> A research paper is in the works.</h2>
+                    </div>
+                </div>
+
+
                 <div class="wrapper">
                     <div class="content"><a href="https://github.com/aryanballani/BookstoreManagementSystem" target="_blank">
                         <h2>Bookstore Management</h2>
@@ -236,7 +252,6 @@
                             <li>Seamless Integration with MySQL for Robust Database</li>
                         </p>
                     </div>
-                    <!-- <i class="fa-brands fa-python fa-10x"></i> -->
                     <img class="fa-brands" src="images/python.svg">
                 </a></div>
                 <div class="wrapper">
