@@ -390,3 +390,14 @@ main {
     font-weight: bold;
     cursor: pointer;
 }
+
+.popup {
+    display: none; /* Hidden by default */
+    position: absolute;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 1000;
+}

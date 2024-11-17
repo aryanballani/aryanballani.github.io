@@ -26,6 +26,51 @@
             document.getElementById("modal").style.display = "none";
         }
 
+
+        document.addEventListener("DOMContentLoaded", () => {
+            let age = 21.44657534246; 
+            const msInYear = 365.25 * 24 * 60 * 60 * 1000;
+            const increment = (5 / msInYear);
+            const ageElement = document.getElementById("age");
+            const popup = document.getElementById("popup");
+
+            // Update age in the main display
+            function updateAge() {
+                age += increment;
+                ageElement.textContent = age.toFixed(2); // Default: 3 decimal places
+            }
+
+            // Show and update the popup on hover
+            function showPopup(event) {
+                popup.style.display = "block";
+                popup.style.left = `${event.pageX + 10}px`; // Position the popup next to the mouse cursor
+                popup.style.top = `${event.pageY + 10}px`;
+
+                popupUpdater = setInterval(() => {
+                    popup.textContent = age.toFixed(9);
+                }, 5);
+            }
+
+            // Hide the popup when the mouse leaves
+            function hidePopup() {
+                popup.style.display = "none";
+                clearInterval(popupUpdater); // Stop updating the popup
+            }
+
+            // Add hover event listeners to the age span
+            ageElement.addEventListener("mouseover", showPopup);
+            ageElement.addEventListener("mousemove", (event) => {
+                // Update popup position as the mouse moves
+                popup.style.left = `${event.pageX + 10}px`;
+                popup.style.top = `${event.pageY + 10}px`;
+            });
+            ageElement.addEventListener("mouseout", hidePopup);
+
+            // Update the age every 5 milliseconds
+            setInterval(updateAge, 5);
+        });
+
+
     </script>
     <title>Personal Website</title>
 </head>
@@ -126,12 +171,13 @@
          <div id="about">
             <div class="about-content">
                 <div class ="column">
-                    <p>Hey, I'm Aryan Ballani, a Computer Science and Statistics wiz currently rocking my third year at
+                    <p>Hey, I'm Aryan Ballani, <span id="age">0.00</span> years old, a Computer Science and Statistics wiz currently rocking my third year at
                         the University of British Columbia. Right now, I'm a Software QA Analyst on co-op at the BC Liquor
                         Distribution Branch in Vancouver. <br>
                         p.s. I'm probably working on something new, so stay tuned.   
     
                     </p>
+                    <div id="popup" class="popup">0.000000000</div>
                 </div>
                 <img class="profile_pic" src="images/profile_pic.jpg">
                 <div class ="column">
