@@ -1,5 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
+:root{
+    --overlay-color: rgba(0, 0, 0, 0.3);
+    --body-background: rgb(28, 27, 27);
+    --nav-yellow: rgb(173, 163, 59);
+    --project-box-color: rgb(76, 71, 71);
+    --nav-background-color: rgb(61, 59, 59);
+}
 
+*{
+    margin: 0;
+    padding: 0;
+}
 html{
     scroll-behavior: smooth;
 } 
@@ -8,7 +19,7 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: rgb(28, 27, 27);
+    background-color: var(--body-background);
     color: white;
     background-image: url('images/background.avif');
     background-size: cover;
@@ -20,73 +31,72 @@ li, a, button {
     font-family: Anta;
     font-weight: 400;
     font-size: 16px;
-    color: rgb(173, 163, 59);
+    color: var(--nav-yellow);
     text-decoration: none;
 }
 
-header {
+nav {
+    height: 60px;
+    background-color: var(--nav-background-color);
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 10px 10px 10px 10px;
-    background-color: rgb(61, 59, 59);
-    position: fixed;
-    top: 0;
-    width: 99%;
-    z-index: 9999;     /*highest pref to nav bar*/
 }
 
-  
-.logo {    
-    /* background-color: aliceblue; */
-    cursor: default;
-    height: 40px;
-    width: 400px;
-    margin-right: auto;
-    margin-left: -90px;
-    display: flex;
-    align-items: flex-end;
-}
-
-.logo img {
+.links-container {
     height: 100%;
     width: 100%;
-    margin: 0px;
+    display: flex;
+    align-items: center;
+    flex-wrap: row;
 }
 
-.logo h1 {
+nav a {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    text-decoration: None;
+    color:#FFFFFF;
+}
+
+nav a:hover {
+    background-color: var(--nav-yellow);
+    color:#333
+}
+
+nav .logo {
     font-family: Anta;
     font-weight: 400;
-    height: 100%;
-    width: 100%;
-    color: rgb(203, 193, 75);
-    margin-left: -75px;
-    align-self: center;
+    margin-right: auto;
+    color: var(--nav-yellow);
+    display: flex;
+    align-items: center;
+    height: 100%; /* Match nav height */
 }
 
-.navbar {
-    list-style: none;
+nav .logo img {
+    height: 50px;
+    width: auto;
+    margin-right: 10px; 
+    margin-left: 20px;
 }
 
-.navbar li {
-    display: inline-block;
-    padding: 0px 20px;
+nav .logo h1 {
+    font-size: 1.6rem; /* Adjust this value to your needs */
 }
 
-.navbar li a{
-    transition: all 0.3s ease 0s;
-    color: white;
+#nav-toggle {
+    display: none;
 }
 
-.navbar li a:hover{
-    color:  black;
-    background-color: rgb(173, 163, 59);
+.open-sidebar {
+    display: none;
 }
 
 button {
     padding: 9px 25px;
     margin-right: 5px;
-    background-color: rgb(173, 163, 59, 1);
+    background-color: var(--nav-yellow);
     border: none;
     border-radius: 50px;
     transition: all 0.3s ease 0s;
@@ -97,7 +107,6 @@ button {
 /* NAVBAR END */
 
 main {
-    margin-top: 30px;
     font-family: Anta;
     font-weight: 400;
     color: #ababab;
@@ -206,12 +215,10 @@ main {
 }
 
 .about-col-1 {
-    /* background-color: rgb(96, 118, 137);  */
     float: left;
 }
 
 .row {
-    /* background-color: rgb(173, 163, 59); */
     display: grid;
     grid-template-columns: 0.6fr 1fr;
 }
@@ -305,7 +312,7 @@ main {
 }
 
 .wrapper .content {
-    background: rgb(76, 71, 71);
+    background: var(--project-box-color);
     padding: 20px 40px;
     font-size: 13px;
     font-weight: 300;
@@ -348,7 +355,7 @@ main {
 
 .wrapper:hover .content{
     filter: blur(1px);
-    background-color: rgb(31, 21, 165, 0);
+    opacity: 0.3;
     transform: translateY(-10px);
 }
 
@@ -400,4 +407,59 @@ main {
     border-radius: 5px;
     font-size: 14px;
     z-index: 1000;
+}
+
+
+ /* media query for mobile devices */
+ @media(max-width:954px) {
+    .links-container {
+        flex-direction: column;
+        align-items: flex-start;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100%;
+        background-color: var(--nav-background-color);
+        z-index: 10;
+        transition: 0.75s ease-out;
+        padding-top: 60px;
+    }
+
+    nav .logo {
+        height: auto;
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    nav a{
+        box-sizing: border-box;
+        height: auto;
+        width: 100%;
+        padding: 20px 30px;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .open-sidebar {
+        padding: 20px;
+        display: block;
+        z-index: 11;
+    }
+
+    #nav-toggle:checked ~ .links-container {
+        right: 0;
+    }
+
+    #nav-toggle:checked ~ #overlay {
+        background-color: var(--overlay-color);
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9;
+    }
+    /* NAVBAR END */
+
 }
