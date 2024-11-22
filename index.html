@@ -26,10 +26,26 @@
             document.getElementById("modal").style.display = "none";
         }
 
-
+        // Age display
         document.addEventListener("DOMContentLoaded", () => {
-            let age = 21.44657534246; 
             const msInYear = 365.25 * 24 * 60 * 60 * 1000;
+
+            function calculatePreciseAge(birthDate) {
+                // Difference in milliseconds between now and the birthdate
+                const ageInMs = new Date() - birthDate;
+
+                // Convert milliseconds to years
+                const ageInYears = ageInMs / msInYear;
+
+                // Return age with 10 decimal places
+                return ageInYears;
+            }
+
+            // Initialize birthdate (June 7, 2003)
+            const birthDate = new Date('2003-06-07T00:00:00');
+
+            // Calculate the precise age
+            let age = calculatePreciseAge(birthDate);
             const increment = (5 / msInYear);
             const ageElement = document.getElementById("age");
             const popup = document.getElementById("popup");
@@ -76,27 +92,29 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <img  src="images/nav-logo.svg" alt="AB">
-            <h1><B>Aryan Ballani</B></h1>
+    <nav>
+        <input type="checkbox" id="nav-toggle">
+        <label for="nav-toggle" class="open-sidebar"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></label>
+        <label id="overlay" for="nav-toggle"></label>
+        <div class="links-container">
+            <div class="logo">
+                <img src="images/nav-logo.svg" alt="AB">
+                <h1>Aryan Ballani</h1>
+            </div>
+            <a class="xp" href="#experience">XP & Skills</a>
+            <a href="#projects">Projects</a> 
+            <a href="#about">About</a>  
+            <a href="mailto:aryanballani@gmail.com">Contact Me</a>
+            <a href="https://github.com/aryanballani" target="_blank"><i class="fab fa-github"></i>GitHub</a>
+            <a href="resume/resume.pdf" id="cv" target="_blank"><button>Resume</button></a>
         </div>
-        <nav>
-            <ul class="navbar">
-                <li><a href="#about">About</a></li>  
-                <li><a href="#experience">XP & Skills</a></li>
-                <li><a href="#projects">Projects</a></li> 
-                <li><a href="mailto:aryanballani@gmail.com">Contact Me</a></li>
-                <li><a href="https://github.com/aryanballani" target="_blank"><i class="fab fa-github"></i>GitHub</a></li> 
-            </ul>
-        </nav>
-        <a href="resume/resume.pdf" id="cv" target="_blank"><button>Resume</button></a>
-    </header>
+    </nav>
 
+    
 
     <main>
         <!-- ------------------------Skills and Xp--------------- -->
-        <div id="experience">
+        <!-- <div id="experience">
             <div class="row">
                 
                 <div class="about-col-1">
@@ -164,11 +182,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <!-- <hr> -->
          <!-- ------------------------About--------------- -->
-         <div id="about">
+         <!-- <div id="about">
             <div class="about-content">
                 <div class ="column">
                     <p>Hey, I'm Aryan Ballani, <span id="age">0.00</span> years old, a Computer Science and Statistics wiz currently rocking my third year at
@@ -191,9 +208,7 @@
                     </p>
                 </div>
             </div>
-        </div>
-
-        <!-- <hr> -->
+        </div> -->
          
         <!-- Projects display -->
         <div id="projects">
