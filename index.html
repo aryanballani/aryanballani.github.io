@@ -26,10 +26,26 @@
             document.getElementById("modal").style.display = "none";
         }
 
-
-        document.addEventListener("DOMContentLoaded", () => {
-            let age = 21.44657534246; 
+         // Age display
+         document.addEventListener("DOMContentLoaded", () => {
             const msInYear = 365.25 * 24 * 60 * 60 * 1000;
+
+            function calculatePreciseAge(birthDate) {
+                // Difference in milliseconds between now and the birthdate
+                const ageInMs = new Date() - birthDate;
+
+                // Convert milliseconds to years
+                const ageInYears = ageInMs / msInYear;
+
+                // Return age with 10 decimal places
+                return ageInYears;
+            }
+
+            // Initialize birthdate (June 7, 2003)
+            const birthDate = new Date('2003-06-07T00:00:00');
+
+            // Calculate the precise age
+            let age = calculatePreciseAge(birthDate);
             const increment = (5 / msInYear);
             const ageElement = document.getElementById("age");
             const popup = document.getElementById("popup");
