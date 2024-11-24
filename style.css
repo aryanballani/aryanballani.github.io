@@ -496,7 +496,27 @@ main {
     .profile-card-content {
         font-size: 1rem;
     }
-
     /* profile card end */
+}
 
+@media (max-width: 480px) {
+    #profile-card {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    .profile_pic {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-card-content {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .profile-card-content a {
+        font-size: 1.3rem;
+        margin: 10px 8px;
+    }
 }
