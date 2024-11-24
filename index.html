@@ -26,6 +26,14 @@
             document.getElementById("modal").style.display = "none";
         }
 
+        function openResume() {
+            document.getElementById("resume").style.display = "flex";
+        }
+
+        function closeResume() {
+            document.getElementById("resume").style.display = "none";
+        }
+
         // Age display
         document.addEventListener("DOMContentLoaded", () => {
             const msInYear = 365.25 * 24 * 60 * 60 * 1000;
@@ -81,7 +89,7 @@
                 popup.style.top = `${event.pageY + 10}px`;
             });
             ageElement.addEventListener("mouseout", hidePopup);
-
+            ageElement.addEventListener("click", openResume);
             // Update the age every 5 milliseconds
             setInterval(updateAge, 5);
         });
@@ -104,9 +112,9 @@
             <a class="xp" href="#experience">XP & Skills</a>
             <a href="#projects">Projects</a> 
             <a href="#about">About</a>  
-            <a href="mailto:aryanballani@gmail.com">Contact Me</a>
+            <!-- <a href="mailto:aryanballani@gmail.com">Contact Me</a> -->
             <a href="https://github.com/aryanballani" target="_blank"><i class="fab fa-github"></i>GitHub</a>
-            <a href="resume/resume.pdf" id="cv" target="_blank"><button>Resume</button></a>
+            <a href="resume/resume.pdf" id="cv" target="_blank">Resume</a>
         </div>
     </nav>
 
@@ -185,30 +193,42 @@
         </div> -->
 
          <!-- ------------------------About--------------- -->
-         <!-- <div id="about">
-            <div class="about-content">
-                <div class ="column">
-                    <p>Hey, I'm Aryan Ballani, <span id="age">0.00</span> years old, a Computer Science and Statistics wiz currently rocking my third year at
-                        the University of British Columbia. Right now, I'm a Software QA Analyst on co-op at the BC Liquor
-                        Distribution Branch in Vancouver. <br>
-                        p.s. I'm probably working on something new, so stay tuned.   
-    
-                    </p>
+         <div class="profile-card">
+            <img class="profile_pic" src="images/profile_pic1.png" alt="Profile Picture">
+            <div class="profile-card-content">
+                <p>
+                    <i class="fa-solid fa-location-dot"></i> Vancouver BC, Canada<br>
+                    <i class="fa-solid fa-graduation-cap"></i> Comp Sci + Stats @ UBC<br> 
+                    <i class="fa-solid fa-briefcase"></i> Incoming ML Engineering Co-op<br>
+                    <i class="fa-solid fa-cube"></i> 3x3 Rubik's cube PB: 28sec 😪<br>
+                    <i class="fa-solid fa-chart-simple"></i><span id="age">0.00</span> years old
                     <div id="popup" class="popup">0.000000000</div>
-                </div>
-                <img class="profile_pic" src="images/profile_pic.jpg">
-                <div class ="column">
-                    <p>
-                        When I'm not debugging code, I'm diving headfirst into data analysis, unraveling mysteries and 
-                        crunching numbers like a pro or probably Sleeping😪.<br>
+                     ☝️ Click Here
 
-                        I live for the thrill of solving tech puzzles and making sense of 
-                        the digital world, one line of code at a time.<br>
-                        
-                    </p>
+                </p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/ayee_bee_jr/" target="_blank" aria-label="Instagram">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/aryanballani/" target="_blank" aria-label="LinkedIn">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:aryanballani@gmail.com" aria-label="Email">
+                        <i class="fa fa-envelope"></i>
+                    </a>
+                    <a href="https://github.com/aryanballani" target="_blank" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
                 </div>
             </div>
-        </div> -->
+        </div>
+
+        <div id="resume" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick=closeResume()>&times;</span>
+                <h2 >You have been clickbaited into viewing my Resume <br> <a href="resume/resume.pdf" target="_blank">VIew Now</a></h2>
+            </div>
+        </div>
          
         <!-- Projects display -->
         <div id="projects">
