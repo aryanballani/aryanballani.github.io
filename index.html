@@ -92,11 +92,40 @@
             ageElement.addEventListener("click", openResume);
             // Update the age every 5 milliseconds
             setInterval(updateAge, 5);
+
+
+            // For navigation
+            const navLinks = document.querySelectorAll('.links-container a');
+            const navToggle = document.getElementById('nav-toggle');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    // Only handle links that point to internal sections
+                    if (link.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        
+                        // Get the target section
+                        const targetId = link.getAttribute('href').substring(1);
+                        const targetSection = document.getElementById(targetId);
+                        
+                        if (targetSection) {
+                            // Close mobile menu if open
+                            navToggle.checked = false;
+                            
+                            // Smooth scroll to section
+                            targetSection.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
         });
 
 
     </script>
-    <title>Personal Website</title>
+    <title>AB: Personal Website</title>
 </head>
 
 <body>
@@ -109,9 +138,9 @@
                 <img src="images/nav-logo.svg" alt="AB">
                 <h1>Aryan Ballani</h1>
             </div>
-            <a class="xp" href="#experience">XP & Skills</a>
+            <a href="#experience">XP & Skills</a>
             <a href="#projects">Projects</a> 
-            <a href="#about">About</a>  
+            <a href="#profile-card">About</a>  
             <!-- <a href="mailto:aryanballani@gmail.com">Contact Me</a> -->
             <a href="https://github.com/aryanballani" target="_blank"><i class="fab fa-github"></i>GitHub</a>
             <a href="resume/resume.pdf" id="cv" target="_blank">Resume</a>
@@ -193,7 +222,7 @@
         </div> -->
 
          <!-- ------------------------About--------------- -->
-         <div class="profile-card">
+         <div id="profile-card">
             <img class="profile_pic" src="images/profile_pic1.png" alt="Profile Picture">
             <div class="profile-card-content">
                 <p>

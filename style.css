@@ -12,9 +12,15 @@
     margin: 0;
     padding: 0;
 }
-html{
+
+html {
+    scroll-padding-top: 60px;
     scroll-behavior: smooth;
-} 
+}
+
+#experience, #projects, #profile-card {
+    scroll-margin-top: 60px;
+}
 
 body {
     box-sizing: border-box;
@@ -122,7 +128,7 @@ main {
     -moz-animation:spin 4s linear infinite;
     animation:spin 4s linear infinite; */
 
-.profile-card {
+#profile-card {
     background-color: var(--nav-background-color); /* Semi-transparent background */
     opacity: 0.9;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
