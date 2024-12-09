@@ -88,6 +88,11 @@ nav .logo img {
     margin-left: 20px;
 }
 
+nav .logo img:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
 nav .logo h1 {
     font-size: 1.2rem; /* Adjust this value to your needs */
 }
