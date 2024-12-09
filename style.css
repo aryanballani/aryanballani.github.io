@@ -129,7 +129,7 @@ main {
     animation:spin 4s linear infinite; */
 
 #profile-card {
-    background-color: var(--nav-background-color); /* Semi-transparent background */
+    background-color: var(--project-box-color);
     opacity: 0.9;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
@@ -218,59 +218,43 @@ main {
 
 /* ------------------Skills and XP________________ */
 
-#experience{
-    padding-top: 80px;
-    padding-left: -100px;
-    padding-bottom: 80px;
-    padding-right: 40px;
+/* experience common*/
+#experience {
+    display: flex;
+    flex-direction: row;
+    padding: 60px 20px;
 }
 
-.about-col-2 img{
-    width: 100%;
-    border-radius: 15px;
+.about-col {
+    background-color: var(--project-box-color);
+    opacity: 0.9;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    padding: 2rem;
+    max-width: max-content;
+    margin: auto;
 }
 
-.about-col-1 {
-    float: left;
-}
-
-.row {
-    display: grid;
-    grid-template-columns: 0.6fr 1fr;
-}
-
-.tab-contents li{
-    margin: 20px 50px;
-    font-size: 20px;
-    color: #ababab;
-    text-align:left; 
-    vertical-align: middle;
-    /* color: #ADA33B; */
-}
-
-.skills {
-    display: grid;
-    grid-template-columns: 16.66% 16.66% 16.66% 16.66% 16.66% 16.66%;
-}
-
-.skills div {
-    margin: 10px;
-    align-items: center;
-}
-
+/* left side in experience */
 .work-xp {
     color: #FFFFFF;
     padding: 1.5rem;
-    max-width: 22rem;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: max-content;
 }
 
 .company-icon {
     padding: 0.5rem;
-    border-radius: 9999px;
+    border-radius: 50%;
     color: #FFFFFF;
     margin-right: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    font-size: 0.75rem;
 }
 
 .work-position {
@@ -288,13 +272,13 @@ main {
     background-color: #047857;
     color: #FFFFFF;
     font-weight: 600;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     display: flex;
     align-items: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .more-info button:hover {
@@ -307,10 +291,28 @@ main {
     margin-left: 0.5rem;
 }
 
+/* right side in experience */
+
+.skills {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+
+.about-col img{
+    width: 100%;
+    border-radius: 15px;
+}
+
+.skills div {
+    margin: 10px;
+    align-items: center;
+}
+
 /* ------------------Projects________________ */
 
 #projects {
-    padding: 60px 30px;
+    padding: 60px 20px;
 }
 
 .project-box {
@@ -334,6 +336,7 @@ main {
     font-weight: 300;
     border-radius: 10px;
     align-items: justify;
+    height: 100%;
 }
 
 .wrapper .content h2{
@@ -426,6 +429,14 @@ main {
 }
 
 
+@media(max-width:1430px) {
+    .experience {
+        flex-direction: column;
+        gap: 50px;
+        padding: 20px;
+    }
+}
+
  /* media query for mobile devices */
  @media(max-width:954px) {
     .links-container {
@@ -497,6 +508,8 @@ main {
         font-size: 1rem;
     }
     /* profile card end */
+
+
 }
 
 @media (max-width: 480px) {
