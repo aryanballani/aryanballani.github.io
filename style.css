@@ -1,15 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
+:root{
+    --overlay-color: rgba(0, 0, 0, 0.3);
+    --body-background: rgb(28, 27, 27);
+    --nav-yellow: rgb(173, 163, 59);
+    --project-box-color: rgb(76, 71, 71);
+    --nav-background-color: rgb(61, 59, 59);
+    --default-text-color: white;
+}
 
-html{
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-padding-top: 60px;
     scroll-behavior: smooth;
-} 
+}
+
+#experience, #projects, #profile-card {
+    scroll-margin-top: 60px;
+}
 
 body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: rgb(28, 27, 27);
-    color: white;
+    background-color: var(--body-background);
+    color: var(--default-text-color);
     background-image: url('images/background.avif');
     background-size: cover;
     background-repeat: no-repeat;
@@ -20,148 +38,160 @@ li, a, button {
     font-family: Anta;
     font-weight: 400;
     font-size: 16px;
-    color: rgb(173, 163, 59);
+    color: var(--nav-yellow);
     text-decoration: none;
 }
 
-header {
+nav {
+    height: 60px;
+    background-color: var(--nav-background-color);
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 10px 10px 10px 10px;
-    background-color: rgb(61, 59, 59);
-    position: fixed;
-    top: 0;
-    width: 99%;
-    z-index: 9999;     /*highest pref to nav bar*/
 }
 
-  
-.logo {    
-    /* background-color: aliceblue; */
-    cursor: default;
-    height: 40px;
-    width: 400px;
-    margin-right: auto;
-    margin-left: -90px;
-    display: flex;
-    align-items: flex-end;
-}
-
-.logo img {
+.links-container {
     height: 100%;
     width: 100%;
-    margin: 0px;
+    display: flex;
+    align-items: center;
+    flex-wrap: row;
 }
 
-.logo h1 {
+nav a {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    text-decoration: None;
+    color:var(--default-text-color);
+}
+
+nav a:hover {
+    background-color: var(--nav-yellow);
+    color:#333
+}
+
+nav .logo {
     font-family: Anta;
     font-weight: 400;
-    height: 100%;
-    width: 100%;
-    color: rgb(203, 193, 75);
-    margin-left: -75px;
-    align-self: center;
+    margin-right: auto;
+    color: var(--nav-yellow);
+    display: flex;
+    align-items: center;
+    height: 100%; /* Match nav height */
 }
 
-.navbar {
-    list-style: none;
+nav .logo img {
+    height: 50px;
+    width: auto;
+    margin-right: 10px; 
+    margin-left: 20px;
 }
 
-.navbar li {
-    display: inline-block;
-    padding: 0px 20px;
-}
-
-.navbar li a{
-    transition: all 0.3s ease 0s;
-    color: white;
-}
-
-.navbar li a:hover{
-    color:  black;
-    background-color: rgb(173, 163, 59);
-}
-
-button {
-    padding: 9px 25px;
-    margin-right: 5px;
-    background-color: rgb(173, 163, 59, 1);
-    border: none;
-    border-radius: 50px;
-    transition: all 0.3s ease 0s;
+nav .logo img:hover {
+    transform: scale(1.1);
     cursor: pointer;
-    color: black;
+}
+
+nav .logo h1 {
+    font-size: 1.2rem; /* Adjust this value to your needs */
+}
+
+#nav-toggle {
+    display: none;
+}
+
+.open-sidebar {
+    display: none;
+}
+
+#cv {
+    background-color: var(--overlay-color);
+    color: var(--nav-yellow);
+}
+
+#cv:hover{
+    background-color: var(--nav-yellow);
+    color: var(--body-background);
 }
 
 /* NAVBAR END */
 
 main {
-    margin-top: 30px;
     font-family: Anta;
     font-weight: 400;
     color: #ababab;
 }
 
-
-
-/* ------------------About________________ */
 .heading{
     text-align: center;
 }
 
-#about{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 80px 40px;
-}
+/* ------------------Profile Card________________ */
 
-.about-content p{
-    margin: 20px 50px;
-    font-size: 20px;
-    color: #ababab;
-    text-align:center; 
-    vertical-align: middle;
-    /* color: #ADA33B; */
-}
+/*     -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite; */
 
-
-.about-content {
-    display: flex;
-    gap: 20px;
-    max-width: 1200px;
-}
-
-.column {
-    flex: 1;
-}
-
-.column p {
-    margin: 20px 50px;
-    font-size: 20px;
-    color: #ababab;
-    text-align:center; 
-    vertical-align: middle;
-    /* color: #ADA33B; */
+#profile-card {
+    background-color: var(--project-box-color);
+    opacity: 0.9;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 30px auto;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
 }
 
 .profile_pic {
-    width: 100%;
-    max-width: 200px;
     border-radius: 50%;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
-}
-
-
-.profile_pic{
-    border-radius: 50%; 
-    max-width: 17%; 
-    margin:auto; 
-    display: block;
+    margin-bottom: 1.5rem;
+    border: 4px solid var(--nav-yellow);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     -webkit-animation:spin 4s linear infinite;
     -moz-animation:spin 4s linear infinite;
     animation:spin 4s linear infinite;
+}
+
+.profile-card-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var();
+}
+
+.profile-card-content i {
+    color: rgb(173, 163, 59);
+    margin-right: 8px;
+    width: 20px;
+}
+
+/* Social Media Links */
+.profile-card-content a {
+    display: inline-block;
+    margin: 15px 10px;
+    font-size: 1.5rem;
+    color: var(--default-text-color);
+    transition: all 0.3s ease;
+}
+
+.profile-card-content a:hover {
+    color: var(--nav-background-color);
+    transform: translateY(-3px);
+}
+
+
+/* Add styles for the age span to indicate it's hoverable */
+#age {
+    cursor: pointer;
+    color: rgb(173, 163, 59);
 }
 
 @-moz-keyframes spin { 
@@ -193,61 +223,43 @@ main {
 
 /* ------------------Skills and XP________________ */
 
-#experience{
-    padding-top: 80px;
-    padding-left: -100px;
-    padding-bottom: 80px;
-    padding-right: 40px;
+/* experience common*/
+#experience {
+    display: flex;
+    flex-direction: row;
+    padding: 60px 20px;
 }
 
-.about-col-2 img{
-    width: 100%;
-    border-radius: 15px;
+.about-col {
+    background-color: var(--project-box-color);
+    opacity: 0.9;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    padding: 2rem;
+    max-width: max-content;
+    margin: auto;
 }
 
-.about-col-1 {
-    /* background-color: rgb(96, 118, 137);  */
-    float: left;
-}
-
-.row {
-    /* background-color: rgb(173, 163, 59); */
-    display: grid;
-    grid-template-columns: 0.6fr 1fr;
-}
-
-.tab-contents li{
-    margin: 20px 50px;
-    font-size: 20px;
-    color: #ababab;
-    text-align:left; 
-    vertical-align: middle;
-    /* color: #ADA33B; */
-}
-
-.skills {
-    display: grid;
-    grid-template-columns: 16.66% 16.66% 16.66% 16.66% 16.66% 16.66%;
-}
-
-.skills div {
-    margin: 10px;
-    align-items: center;
-}
-
+/* left side in experience */
 .work-xp {
     color: #FFFFFF;
     padding: 1.5rem;
-    max-width: 22rem;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: max-content;
 }
 
 .company-icon {
     padding: 0.5rem;
-    border-radius: 9999px;
+    border-radius: 50%;
     color: #FFFFFF;
     margin-right: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    font-size: 0.75rem;
 }
 
 .work-position {
@@ -265,13 +277,13 @@ main {
     background-color: #047857;
     color: #FFFFFF;
     font-weight: 600;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     display: flex;
     align-items: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .more-info button:hover {
@@ -284,10 +296,28 @@ main {
     margin-left: 0.5rem;
 }
 
+/* right side in experience */
+
+.skills {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+
+.about-col img{
+    width: 100%;
+    border-radius: 15px;
+}
+
+.skills div {
+    margin: 10px;
+    align-items: center;
+}
+
 /* ------------------Projects________________ */
 
 #projects {
-    padding: 60px 30px;
+    padding: 60px 20px;
 }
 
 .project-box {
@@ -305,12 +335,13 @@ main {
 }
 
 .wrapper .content {
-    background: rgb(76, 71, 71);
+    background: var(--project-box-color);
     padding: 20px 40px;
     font-size: 13px;
     font-weight: 300;
     border-radius: 10px;
     align-items: justify;
+    height: 100%;
 }
 
 .wrapper .content h2{
@@ -348,7 +379,7 @@ main {
 
 .wrapper:hover .content{
     filter: blur(1px);
-    background-color: rgb(31, 21, 165, 0);
+    opacity: 0.3;
     transform: translateY(-10px);
 }
 
@@ -400,4 +431,110 @@ main {
     border-radius: 5px;
     font-size: 14px;
     z-index: 1000;
+}
+
+
+@media(max-width:1430px) {
+    .experience {
+        flex-direction: column;
+        gap: 50px;
+        padding: 20px;
+    }
+}
+
+ /* media query for mobile devices */
+ @media(max-width:954px) {
+    .links-container {
+        flex-direction: column;
+        align-items: flex-start;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100%;
+        background-color: var(--nav-background-color);
+        z-index: 10;
+        transition: 0.75s ease-out;
+        padding-top: 60px;
+    }
+
+    nav .logo {
+        height: auto;
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    nav a{
+        box-sizing: border-box;
+        height: auto;
+        width: 100%;
+        padding: 20px 30px;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    #cv:hover{
+        background-color: var(--nav-yellow);
+        color: var(--body-background);
+    }
+
+    .open-sidebar {
+        padding: 20px;
+        display: block;
+        z-index: 11;
+    }
+
+    #nav-toggle:checked ~ .links-container {
+        right: 0;
+    }
+
+    #nav-toggle:checked ~ #overlay {
+        background-color: var(--overlay-color);
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9;
+    }
+    /* NAVBAR END */
+
+    .profile-card {
+        width: 85%;
+        padding: 1.5rem;
+    }
+
+    .profile_pic {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-card-content {
+        font-size: 1rem;
+    }
+    /* profile card end */
+
+
+}
+
+@media (max-width: 480px) {
+    #profile-card {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    .profile_pic {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-card-content {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .profile-card-content a {
+        font-size: 1.3rem;
+        margin: 10px 8px;
+    }
 }
