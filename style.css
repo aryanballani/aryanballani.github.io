@@ -435,7 +435,7 @@ main {
 
 
 @media(max-width:1430px) {
-    .experience {
+    #experience {
         flex-direction: column;
         gap: 50px;
         padding: 20px;
