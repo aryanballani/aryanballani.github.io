@@ -34,14 +34,6 @@
             document.getElementById("resume").style.display = "none";
         }
 
-        function openTempModal() {
-            document.getElementById("resume-modal").style.display = "flex";
-        }
-
-        function closeTempModal() {
-            document.getElementById("resume-modal").style.display = "none";
-        }
-
         // Age display
         document.addEventListener("DOMContentLoaded", () => {
             const msInYear = 365.25 * 24 * 60 * 60 * 1000;
@@ -150,18 +142,10 @@
             <a href="#experience">XP & Skills</a>
             <a href="#projects">Projects</a> 
             <a href="https://github.com/aryanballani" target="_blank"><i class="fab fa-github"></i>GitHub</a>
-            <a href="#" id="cv" onclick="openTempModal()">Resume</a>
+            <a href="resume/resume.pdf" id="cv" target="_blank">Resume</a>
         </div>
     </nav>
 
-    <div id="resume-modal" class="modal" style="display:none;">
-      <div class="modal-content">
-        <span class="close" onclick="closeTempModal()">&times;</span>
-        <h2>Hi Chhavi, Thank you for the thorough peer review of the website 🙏😭. My resume should be visible now, Happy Stalking :).<br>
-          <a href="resume/resume.pdf" target="_blank">View Resume PDF</a>
-        </h2>
-      </div>
-    </div>
     
 
     <main>
@@ -172,7 +156,7 @@
                 <p>
                     <i class="fa-solid fa-location-dot"></i> Vancouver BC, Canada<br>
                     <i class="fa-solid fa-graduation-cap"></i> Comp Sci + Stats @ UBC<br> 
-                    <i class="fa-solid fa-briefcase"></i> Railtown AI Inc.<br>
+                    <i class="fa-solid fa-briefcase"></i> Railtown AI Inc. <br>
                     <i class="fa-solid fa-cube"></i> 3x3 Rubik's cube PB: 28sec 😪<br>
                     <i class="fa-solid fa-chart-simple"></i><span id="age">0.00</span> years old
                     <div id="popup" class="popup">0.000000000</div>
