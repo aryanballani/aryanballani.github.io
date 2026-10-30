@@ -1,0 +1,122 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import Dialog from './Dialog.astro';
+import { techLogo } from '../lib/tech-logos';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, summary, highlights, tech, logo, year, href, repo, private: privateNote } = project.data;
+const primary = href ?? repo;
+const dialogId = `private-${project.id}`;
+---
+
+<article
+  class="project-card group relative flex flex-col overflow-hidden rounded-xl border border-border bg-surface transition-[translate,border-color] duration-300 hover:-translate-y-1 hover:border-accent/40 focus-within:border-accent/40"
+>
+  <div class="card-content flex flex-1 flex-col p-6">
+    <div class="flex items-baseline justify-between gap-4">
+      <h3 class="font-medium">
+        {
+          privateNote ? (
+            <button type="button" data-dialog-open={dialogId} class="stretched cursor-pointer text-left">
+              {title}
+            </button>
+          ) : (
+            <a href={primary} target="_blank" rel="noopener" class="stretched">
+              {title}
+            </a>
+          )
+        }
+      </h3>
+      <span class="font-mono text-xs text-muted tabular-nums">{year}</span>
+    </div>
+
+    <p class="mt-2 text-[0.94rem] leading-relaxed text-muted">{summary}</p>
+
+    {
+      highlights.length > 0 && (
+        <ul class="mt-4 space-y-1.5 text-sm leading-relaxed text-muted">
+          {highlights.map((h) => (
+            <li class="relative pl-4 before:absolute before:top-[0.65em] before:left-0 before:size-1 before:rounded-full before:bg-accent/60">
+              {h}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <div class="mt-auto flex items-end justify-between gap-4 pt-5">
+      <ul class="flex flex-wrap gap-1.5" aria-label="Tech stack">
+        {tech.map((t) => <li class="rounded-md bg-accent-soft px-2 py-0.5 font-mono text-[0.7rem] text-accent">{t}</li>)}
+      </ul>
+      {
+        href && repo && (
+          <a
+            href={repo}
+            target="_blank"
+            rel="noopener"
+            aria-label={`${title} source code`}
+            class="relative z-10 shrink-0 text-muted transition-colors hover:text-text"
+          >
+            <Icon name="simple-icons:github" class="size-4" />
+          </a>
+        )
+      }
+      {privateNote && <Icon name="lucide:lock" class="size-4 shrink-0 text-muted" aria-label="Private repository" />}
+    </div>
+  </div>
+
+  <!-- Easter egg from the original site: on hover the card fades and its tech logo appears -->
+  <img
+    src={techLogo(logo)}
+    alt=""
+    aria-hidden="true"
+    class="tech-logo pointer-events-none absolute inset-0 m-auto size-2/5 max-h-32 object-contain opacity-0"
+  />
+</article>
+
+{
+  privateNote && (
+    <Dialog id={dialogId} label={title}>
+      <Icon name="lucide:lock" class="mx-auto mb-4 size-6 text-accent" />
+      <p class="text-lg leading-relaxed text-balance">{privateNote}</p>
+    </Dialog>
+  )
+}
+
+<style>
+  /* Whole card is clickable via the title link/button */
+  .stretched::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .card-content,
+  .tech-logo {
+    transition:
+      opacity 300ms ease,
+      filter 300ms ease,
+      scale 300ms ease;
+  }
+
+  .tech-logo {
+    scale: 0.9;
+  }
+
+  .project-card:hover .card-content,
+  .project-card:has(:focus-visible) .card-content {
+    opacity: 0.3;
+    filter: blur(2px);
+  }
+
+  .project-card:hover .tech-logo,
+  .project-card:has(:focus-visible) .tech-logo {
+    opacity: 1;
+    scale: 1;
+  }
+</style>

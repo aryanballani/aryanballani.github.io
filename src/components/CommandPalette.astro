@@ -1,0 +1,253 @@
+---
+import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import { sections, site, socials } from '../data/site';
+
+type Command = {
+  label: string;
+  icon: string;
+  action: 'go' | 'open' | 'copy-email' | 'toggle-theme';
+  value?: string;
+  keywords?: string;
+};
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+
+const groups: { heading: string; commands: Command[] }[] = [
+  {
+    heading: 'Navigate',
+    commands: sections.map((s) => ({
+      label: s.id === 'experience' ? 'XP++ (Experience)' : s.label,
+      icon: 'lucide:hash',
+      action: 'go',
+      value: `#${s.id}`,
+    })),
+  },
+  {
+    heading: 'Links',
+    commands: [
+      { label: 'Resume', icon: 'lucide:file-text', action: 'open', value: site.resume, keywords: 'cv pdf' },
+      ...socials
+        .filter((s) => s.label !== 'Email')
+        .map((s) => ({ label: s.label, icon: s.icon, action: 'open' as const, value: s.href })),
+    ],
+  },
+  {
+    heading: 'Projects',
+    commands: projects.map((p) =>
+      p.data.private
+        ? { label: p.data.title, icon: 'lucide:lock', action: 'go' as const, value: '#projects', keywords: p.data.tech.join(' ') }
+        : { label: p.data.title, icon: 'lucide:folder-git-2', action: 'open' as const, value: p.data.href ?? p.data.repo, keywords: p.data.tech.join(' ') },
+    ),
+  },
+  {
+    heading: 'Actions',
+    commands: [
+      { label: 'Copy email', icon: 'lucide:copy', action: 'copy-email', value: site.email, keywords: 'contact mail' },
+      { label: 'Toggle theme', icon: 'lucide:sun-moon', action: 'toggle-theme', keywords: 'dark light mode' },
+    ],
+  },
+];
+
+let index = 0;
+---
+
+<dialog
+  id="cmdk"
+  aria-label="Command palette"
+  class="mx-auto mt-[12vh] w-[min(36rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-border bg-surface p-0 text-text shadow-2xl open:animate-[dialog-in_160ms_ease-out]"
+>
+  <div class="flex items-center gap-3 border-b border-border px-4">
+    <Icon name="lucide:search" class="size-4 shrink-0 text-muted" />
+    <input
+      id="cmdk-input"
+      type="text"
+      role="combobox"
+      aria-expanded="true"
+      aria-controls="cmdk-list"
+      aria-autocomplete="list"
+      autocomplete="off"
+      spellcheck="false"
+      placeholder="Type a command or search…"
+      class="h-13 w-full bg-transparent text-[0.95rem] outline-none placeholder:text-muted"
+    />
+    <kbd class="rounded border border-border px-1.5 py-0.5 font-mono text-[0.65rem] text-muted">esc</kbd>
+  </div>
+
+  <ul id="cmdk-list" role="listbox" class="max-h-[min(24rem,60vh)] overflow-y-auto p-2">
+    {
+      groups.map((group) => (
+        <li role="presentation" data-group>
+          <p class="px-3 pt-2 pb-1 font-mono text-[0.68rem] tracking-wide text-muted uppercase">{group.heading}</p>
+          <ul role="group" aria-label={group.heading}>
+            {group.commands.map((c) => (
+              <li
+                id={`cmdk-item-${index++}`}
+                role="option"
+                aria-selected="false"
+                data-action={c.action}
+                data-value={c.value}
+                data-label={c.label.toLowerCase()}
+                data-keywords={c.keywords?.toLowerCase() ?? ''}
+                class="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted aria-selected:bg-accent-soft aria-selected:text-text"
+              >
+                <Icon name={c.icon} class="size-4 shrink-0" />
+                {c.label}
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+    <li id="cmdk-empty" role="presentation" class="hidden px-3 py-8 text-center text-sm text-muted">
+      No results.
+    </li>
+  </ul>
+</dialog>
+
+<div
+  id="toast"
+  role="status"
+  class="pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2 translate-y-2 rounded-lg border border-border bg-surface px-4 py-2 text-sm opacity-0 shadow-lg transition-all duration-200"
+>
+</div>
+
+<script>
+  const dialog = document.getElementById('cmdk') as HTMLDialogElement;
+  const input = document.getElementById('cmdk-input') as HTMLInputElement;
+  const empty = document.getElementById('cmdk-empty')!;
+  const toast = document.getElementById('toast')!;
+  const items = [...dialog.querySelectorAll<HTMLLIElement>('[role="option"]')];
+  const groups = [...dialog.querySelectorAll<HTMLLIElement>('[data-group]')];
+
+  let visible = items;
+  let active = 0;
+
+  // Show "Ctrl K" instead of "⌘K" off Apple platforms
+  if (!/Mac|iPhone|iPad/.test(navigator.platform)) {
+    document.querySelectorAll('[data-cmdk-open] kbd').forEach((k) => (k.textContent = 'Ctrl K'));
+  }
+
+  // Every query character appears in order
+  function isSubsequence(text: string, query: string) {
+    let i = 0;
+    for (const ch of text) if (ch === query[i]) i++;
+    return i === query.length;
+  }
+
+  // Lower is better; -1 means no match. Fuzzy matching applies to labels only,
+  // keywords must contain the query, so "theme" doesn't hit projects via their tech stack.
+  function score(item: HTMLLIElement, query: string) {
+    const { label = '', keywords = '' } = item.dataset;
+    if (!query) return 0;
+    if (label.startsWith(query)) return 0;
+    if (label.includes(query)) return 1;
+    if (keywords.includes(query)) return 2;
+    if (isSubsequence(label.replace(/\s+/g, ''), query.replace(/\s+/g, ''))) return 3;
+    return -1;
+  }
+
+  function setActive(i: number) {
+    if (!visible.length) {
+      input.removeAttribute('aria-activedescendant');
+      return;
+    }
+    active = (i + visible.length) % visible.length;
+    items.forEach((item) => item.setAttribute('aria-selected', 'false'));
+    const item = visible[active];
+    item.setAttribute('aria-selected', 'true');
+    item.scrollIntoView({ block: 'nearest' });
+    input.setAttribute('aria-activedescendant', item.id);
+  }
+
+  function filter() {
+    const query = input.value.trim().toLowerCase();
+    const scores = new Map(items.map((item) => [item, score(item, query)]));
+    visible = items.filter((item) => {
+      item.hidden = scores.get(item)! < 0;
+      return !item.hidden;
+    });
+    groups.forEach((g) => (g.hidden = !g.querySelector('[role="option"]:not([hidden])')));
+    empty.classList.toggle('hidden', visible.length > 0);
+
+    // Keep the grouped display order, but highlight the best match
+    const best = Math.min(...visible.map((item) => scores.get(item)!));
+    setActive(Math.max(0, visible.findIndex((item) => scores.get(item) === best)));
+  }
+
+  function open() {
+    if (dialog.open) return;
+    input.value = '';
+    filter();
+    dialog.showModal();
+  }
+
+  let toastTimer: number | undefined;
+  function showToast(message: string) {
+    toast.textContent = message;
+    toast.classList.remove('opacity-0', 'translate-y-2');
+    clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => toast.classList.add('opacity-0', 'translate-y-2'), 1800);
+  }
+
+  async function run(item: HTMLLIElement) {
+    const { action, value } = item.dataset;
+    dialog.close();
+
+    if (action === 'go') {
+      document.querySelector(value!)?.scrollIntoView({ behavior: 'smooth' });
+      history.replaceState(null, '', value);
+    } else if (action === 'open') {
+      window.open(value, '_blank', 'noopener');
+    } else if (action === 'copy-email') {
+      try {
+        await navigator.clipboard.writeText(value!);
+        showToast('Email copied to clipboard');
+      } catch {
+        location.href = `mailto:${value}`;
+      }
+    } else if (action === 'toggle-theme') {
+      const root = document.documentElement;
+      const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem('theme', next);
+      } catch {}
+      showToast(`${next[0].toUpperCase()}${next.slice(1)} mode`);
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      dialog.open ? dialog.close() : open();
+      return;
+    }
+    const typing = (e.target as HTMLElement).closest('input, textarea, [contenteditable="true"]');
+    if (e.key === '/' && !typing && !document.querySelector('dialog[open]')) {
+      e.preventDefault();
+      open();
+    }
+  });
+
+  document.querySelectorAll('[data-cmdk-open]').forEach((btn) => btn.addEventListener('click', open));
+
+  input.addEventListener('input', filter);
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActive(active + (e.key === 'ArrowDown' ? 1 : -1));
+    } else if (e.key === 'Enter' && visible[active]) {
+      e.preventDefault();
+      run(visible[active]);
+    }
+  });
+
+  items.forEach((item) => {
+    item.addEventListener('pointermove', () => {
+      const i = visible.indexOf(item);
+      if (i !== active) setActive(i);
+    });
+    item.addEventListener('click', () => run(item));
+  });
+</script>

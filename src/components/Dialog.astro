@@ -1,0 +1,43 @@
+---
+// Native <dialog> modal. Open it from anywhere with a button carrying data-dialog-open="<id>".
+interface Props {
+  id: string;
+  label: string;
+}
+
+const { id, label } = Astro.props;
+---
+
+<dialog
+  id={id}
+  aria-label={label}
+  class="m-auto w-[min(28rem,calc(100vw-2rem))] rounded-2xl border border-border bg-surface p-0 text-text shadow-2xl backdrop:bg-black/60 open:animate-[dialog-in_200ms_ease-out]"
+>
+  <div class="relative px-6 pt-10 pb-7 text-center sm:px-8">
+    <form method="dialog">
+      <button
+        class="absolute top-3 right-3 grid size-8 cursor-pointer place-items-center rounded-full text-muted transition-colors hover:bg-accent-soft hover:text-text"
+        aria-label="Close"
+      >
+        ✕
+      </button>
+    </form>
+    <slot />
+  </div>
+</dialog>
+
+<script>
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+
+    const opener = target.closest<HTMLElement>('[data-dialog-open]');
+    if (opener) {
+      const dialog = document.getElementById(opener.dataset.dialogOpen!);
+      if (dialog instanceof HTMLDialogElement) dialog.showModal();
+      return;
+    }
+
+    // Clicking the backdrop (the dialog element itself, outside its content) closes it
+    if (target instanceof HTMLDialogElement) target.close();
+  });
+</script>

@@ -1,0 +1,111 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import AgeTicker from './AgeTicker.astro';
+import Dialog from './Dialog.astro';
+import profile from '../assets/profile.jpg';
+import { isExternal, site, socials } from '../data/site';
+
+const facts = [
+  { icon: 'lucide:map-pin', text: 'Vancouver, BC, Canada' },
+  { icon: 'lucide:graduation-cap', text: 'Comp Sci + Stats @ UBC' },
+  { icon: 'lucide:briefcase', text: 'Railtown AI · open to full-time roles' },
+  { icon: 'lucide:box', text: "3x3 Rubik's cube PB: 28sec 😪" },
+];
+---
+
+<section id="about" class="relative pt-14 pb-8 sm:pt-20">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -top-24 left-1/2 -z-10 h-72 w-[42rem] max-w-[100vw] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--glow),transparent)]"
+  >
+  </div>
+
+  <div class="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-10">
+    <Image
+      src={profile}
+      alt="Aryan Ballani"
+      width={240}
+      height={240}
+      loading="eager"
+      class="profile-flip size-28 shrink-0 rounded-full object-cover ring-2 ring-accent/70 ring-offset-4 ring-offset-bg sm:size-32"
+    />
+
+    <div class="min-w-0">
+      <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">{site.name}</h1>
+      <p class="mt-3 max-w-xl text-lg leading-relaxed text-muted">
+        Machine Learning Engineer at Railtown AI. I build agent frameworks, data pipelines and the
+        occasional robot shopping cart.
+      </p>
+
+      <ul class="mt-6 space-y-1.5 font-mono text-sm text-muted">
+        {
+          facts.map((f) => (
+            <li class="flex items-center gap-2.5">
+              <Icon name={f.icon} class="size-4 shrink-0 text-accent" />
+              {f.text}
+            </li>
+          ))
+        }
+        <li class="flex items-center gap-2.5">
+          <Icon name="lucide:chart-no-axes-column" class="size-4 shrink-0 text-accent" />
+          <span><AgeTicker /> years old</span>
+        </li>
+        <li class="pl-6.5 text-xs text-muted">☝️ Click above</li>
+      </ul>
+
+      <ul class="mt-7 flex items-center gap-1">
+        {
+          socials.map((s) => (
+            <li>
+              <a
+                href={s.href}
+                target={isExternal(s.href) ? '_blank' : undefined}
+                rel={isExternal(s.href) ? 'noopener' : undefined}
+                aria-label={s.label}
+                class="grid size-10 place-items-center rounded-lg text-muted transition-all hover:-translate-y-0.5 hover:bg-accent-soft hover:text-accent"
+              >
+                <Icon name={s.icon} class="size-[18px]" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <Dialog id="clickbait" label="Resume">
+    <p class="text-lg leading-relaxed text-balance">You have been clickbaited into viewing my Resume</p>
+    <a
+      href={site.resume}
+      target="_blank"
+      rel="noopener"
+      class="mt-5 inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-bg transition-opacity hover:opacity-90"
+    >
+      View Now →
+    </a>
+  </Dialog>
+</section>
+
+<style>
+  /* Easter egg from the original site: a quick 360° flip, then a pause, every 4s */
+  .profile-flip {
+    animation: flip 4s linear infinite;
+  }
+
+  @keyframes flip {
+    12.5% {
+      transform: rotateY(180deg);
+    }
+    25% {
+      animation-timing-function: ease-out;
+      transform: rotateY(360deg);
+    }
+    25%,
+    50%,
+    75%,
+    100% {
+      transform: rotateY(0deg);
+    }
+  }
+</style>

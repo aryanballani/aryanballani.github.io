@@ -1,0 +1,107 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+@import "@fontsource/anta";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Palette: refined olive-gold (accent derives from the AB logo's #ada33b) */
+:root,
+[data-theme="dark"] {
+  --bg: #0f0f0d;
+  --surface: #171714;
+  --border: #26261f;
+  --text: #ecebe4;
+  --muted: #8f8d80;
+  --accent: #c8b950;
+  --accent-soft: rgb(200 185 80 / 0.12);
+  --glow: rgb(200 185 80 / 0.07);
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #f7f6f1;
+  --surface: #ffffff;
+  --border: #e6e3d6;
+  --text: #1a1a17;
+  --muted: #6b6a5f;
+  --accent: #8a7d1e;
+  --accent-soft: rgb(138 125 30 / 0.1);
+  --glow: rgb(173 163 59 / 0.12);
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Anta", var(--font-sans);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  dialog::backdrop {
+    background: rgb(0 0 0 / 0.6);
+    backdrop-filter: blur(4px);
+  }
+}
+
+@layer components {
+  .section-label {
+    @apply font-mono text-xs tracking-widest text-muted uppercase;
+  }
+
+  .link-underline {
+    @apply underline decoration-border underline-offset-4 transition-colors hover:decoration-accent hover:text-text;
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}

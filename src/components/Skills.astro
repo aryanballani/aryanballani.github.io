@@ -1,0 +1,27 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { skills } from '../data/site';
+---
+
+<section id="skills" aria-labelledby="skills-heading" class="py-16">
+  <SectionHeading id="skills" title="Skills" />
+
+  <dl class="space-y-5">
+    {
+      skills.map(({ group, items }) => (
+        <div class="grid gap-2 sm:grid-cols-[9.5rem_1fr] sm:gap-6">
+          <dt class="pt-1 font-mono text-xs text-muted">{group}</dt>
+          <dd>
+            <ul class="flex flex-wrap gap-1.5">
+              {items.map((item) => (
+                <li class="rounded-md border border-border px-2.5 py-1 text-sm transition-colors hover:border-accent/50 hover:text-accent">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>

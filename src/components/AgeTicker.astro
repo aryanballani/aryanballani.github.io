@@ -1,0 +1,77 @@
+---
+// Easter eggs: live age ticker, and a 9-decimal hover popup that follows the cursor.
+// Clicking the age opens the "clickbait" resume dialog (rendered in Hero.astro).
+import { site } from '../data/site';
+---
+
+<button
+  type="button"
+  id="age"
+  data-birth={site.birthDate}
+  data-dialog-open="clickbait"
+  class="cursor-pointer font-mono text-accent tabular-nums underline decoration-accent/30 decoration-dotted underline-offset-4 hover:decoration-accent"
+  aria-describedby="age-popup"
+>
+  00.00
+</button>
+
+<span
+  id="age-popup"
+  role="tooltip"
+  class="pointer-events-none fixed top-0 left-0 z-50 hidden rounded-md border border-border bg-surface px-2.5 py-1.5 font-mono text-sm text-text tabular-nums shadow-lg"
+>
+  00.000000000
+</span>
+
+<script>
+  const MS_PER_YEAR = 365.25 * 24 * 60 * 60 * 1000;
+
+  const age = document.getElementById('age')!;
+  const popup = document.getElementById('age-popup')!;
+  const birth = new Date(age.dataset.birth!).getTime();
+
+  const years = () => (Date.now() - birth) / MS_PER_YEAR;
+
+  let popupVisible = false;
+  let lastShort = '';
+
+  // Recompute from the clock every frame (rather than accumulating increments)
+  // so the age stays exact even after the tab has been throttled in the background.
+  function tick() {
+    const value = years();
+    const short = value.toFixed(2);
+    if (short !== lastShort) age.textContent = lastShort = short;
+    if (popupVisible) popup.textContent = value.toFixed(9);
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  function placePopup(x: number, y: number) {
+    popup.style.translate = `${x + 10}px ${y + 10}px`;
+  }
+
+  function showPopup(x: number, y: number) {
+    popupVisible = true;
+    placePopup(x, y);
+    popup.classList.remove('hidden');
+  }
+
+  function hidePopup() {
+    popupVisible = false;
+    popup.classList.add('hidden');
+  }
+
+  // Mouse: popup follows the cursor. Touch skips the popup; a tap opens the dialog.
+  age.addEventListener('pointerenter', (e) => e.pointerType === 'mouse' && showPopup(e.clientX, e.clientY));
+  age.addEventListener('pointermove', (e) => popupVisible && placePopup(e.clientX, e.clientY));
+  age.addEventListener('pointerleave', hidePopup);
+
+  // Keyboard: anchor the popup under the age
+  age.addEventListener('focus', () => {
+    if (!age.matches(':focus-visible')) return;
+    const r = age.getBoundingClientRect();
+    showPopup(r.left - 10, r.bottom - 4);
+  });
+  age.addEventListener('blur', hidePopup);
+  age.addEventListener('click', hidePopup);
+</script>

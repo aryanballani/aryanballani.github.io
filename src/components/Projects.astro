@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import ProjectCard from './ProjectCard.astro';
+import SectionHeading from './SectionHeading.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const featured = projects.filter((p) => p.data.featured);
+const more = projects.filter((p) => !p.data.featured);
+---
+
+<section id="projects" aria-labelledby="projects-heading" class="py-16">
+  <SectionHeading id="projects" title="Projects">
+    <a
+      href="https://github.com/aryanballani"
+      target="_blank"
+      rel="noopener"
+      class="flex items-center gap-1 font-mono text-xs text-muted transition-colors hover:text-accent"
+    >
+      All on GitHub <Icon name="lucide:arrow-up-right" class="size-3.5" />
+    </a>
+  </SectionHeading>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    {featured.map((project) => <ProjectCard project={project} />)}
+  </div>
+
+  {
+    more.length > 0 && (
+      <>
+        <h3 class="mt-14 mb-3 font-mono text-xs tracking-wide text-muted">More projects</h3>
+        <ul class="divide-y divide-border border-y border-border">
+          {more.map(({ data }) => (
+            <li>
+              <a
+                href={data.href ?? data.repo}
+                target="_blank"
+                rel="noopener"
+                class="group grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 py-4 sm:grid-cols-[12rem_1fr_auto]"
+              >
+                <span class="col-start-1 row-start-1 font-medium transition-colors group-hover:text-accent">{data.title}</span>
+                <span class="col-span-2 col-start-1 row-start-2 text-sm text-muted sm:col-span-1 sm:col-start-2 sm:row-start-1">
+                  {data.summary}
+                </span>
+                <span class="col-start-2 row-start-1 flex items-center gap-2 font-mono text-xs text-muted tabular-nums sm:col-start-3">
+                  {data.year}
+                  <Icon
+                    name="lucide:arrow-up-right"
+                    class="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
+                  />
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+</section>
