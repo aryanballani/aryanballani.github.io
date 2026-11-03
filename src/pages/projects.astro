@@ -1,0 +1,12 @@
+---
+import Page from '../layouts/Page.astro';
+import Projects from '../components/Projects.astro';
+import { site } from '../data/site';
+---
+
+<Page
+  title={`Projects · ${site.name}`}
+  description="Things Aryan Ballani has built: Railtracks, PiLOT, GlideCart, UBC Lens, WasteNet and more."
+>
+  <Projects />
+</Page>

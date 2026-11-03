@@ -9,6 +9,15 @@ npm run build     # type-check + static build into dist/
 npm run preview
 ```
 
+## Pages
+
+| Route | File | Contents |
+|---|---|---|
+| `/` | `src/pages/index.astro` | Hero (About), XP++, Skills |
+| `/projects/` | `src/pages/projects.astro` | Projects |
+
+Every page shares `src/layouts/Page.astro` (nav, footer, ⌘K palette). Nav links live in `nav` in `src/data/site.ts`.
+
 ## Editing content
 
 | What | Where |
@@ -29,10 +38,9 @@ Keep these alive when changing things:
 1. The age ticks live (`AgeTicker.astro`)
 2. Hovering the age shows it to 9 decimals, following the cursor
 3. Clicking the age (see "☝️ Click above") clickbaits you into the resume
-4. The profile picture does a flip every 4 seconds (`Hero.astro`)
-5. The Rubik's cube PB line
-6. The experience section is called **XP++**
-7. Dep2Phrase's card says the repo is private and a paper is in the works
-8. Hovering a project card blurs it and reveals the tech logo (`ProjectCard.astro`)
-9. The AB logo (hand-made, `src/assets/nav-logo.svg`) grows on hover and is the favicon
-10. ⌘K / Ctrl+K / `/` opens the command palette (`CommandPalette.astro`)
+4. The Rubik's cube PB line
+5. The experience section is called **XP++**
+6. Dep2Phrase's card says the repo is private and a paper is in the works
+7. Hovering a project card blurs it and reveals the tech logo (`ProjectCard.astro`)
+8. The AB logo (hand-made, `src/assets/nav-logo.svg`) grows on hover and is the favicon
+9. ⌘K / Ctrl+K / `/` opens the command palette (`CommandPalette.astro`)

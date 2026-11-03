@@ -16,11 +16,11 @@ export const socials = [
   { label: 'Email', href: `mailto:${site.email}`, icon: 'lucide:mail' },
 ] as const;
 
-export const sections = [
-  { id: 'about', label: 'About' },
-  { id: 'experience', label: 'XP++' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'skills', label: 'Skills' },
+export const nav = [
+  { href: '/', label: 'About' },
+  { href: '/#experience', label: 'XP++', keywords: 'experience work jobs' },
+  { href: '/projects/', label: 'Projects' },
+  { href: '/#skills', label: 'Skills' },
 ] as const;
 
 export const skills = [

@@ -28,7 +28,7 @@ const facts = [
       width={240}
       height={240}
       loading="eager"
-      class="profile-flip size-28 shrink-0 rounded-full object-cover ring-2 ring-accent/70 ring-offset-4 ring-offset-bg sm:size-32"
+      class="size-28 shrink-0 rounded-full object-cover ring-2 ring-accent/70 ring-offset-4 ring-offset-bg sm:size-32"
     />
 
     <div class="min-w-0">
@@ -87,25 +87,3 @@ const facts = [
   </Dialog>
 </section>
 
-<style>
-  /* Easter egg from the original site: a quick 360° flip, then a pause, every 4s */
-  .profile-flip {
-    animation: flip 4s linear infinite;
-  }
-
-  @keyframes flip {
-    12.5% {
-      transform: rotateY(180deg);
-    }
-    25% {
-      animation-timing-function: ease-out;
-      transform: rotateY(360deg);
-    }
-    25%,
-    50%,
-    75%,
-    100% {
-      transform: rotateY(0deg);
-    }
-  }
-</style>

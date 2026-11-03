@@ -1,0 +1,20 @@
+---
+import Base from './Base.astro';
+import CommandPalette from '../components/CommandPalette.astro';
+import Footer from '../components/Footer.astro';
+import Nav from '../components/Nav.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+---
+
+<Base {...Astro.props}>
+  <Nav />
+  <main class="mx-auto max-w-3xl px-5 sm:px-6">
+    <slot />
+  </main>
+  <Footer />
+  <CommandPalette />
+</Base>

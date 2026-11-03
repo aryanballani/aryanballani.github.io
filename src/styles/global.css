@@ -48,7 +48,12 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    /* Clears the sticky header (taller on small screens, where page links get a second row) */
+    scroll-padding-top: 7rem;
+
+    @media (width >= 48rem) {
+      scroll-padding-top: 5rem;
+    }
   }
 
   body {
@@ -86,6 +91,11 @@
   }
 }
 
+/* Cross-fade between pages (no JS; browsers without support just navigate normally) */
+@view-transition {
+  navigation: auto;
+}
+
 @keyframes dialog-in {
   from {
     opacity: 0;
@@ -94,6 +104,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+
   html {
     scroll-behavior: auto;
   }

@@ -2,13 +2,15 @@
 interface Props {
   title: string;
   id: string;
+  // h1 when the section is the whole page
+  as?: 'h1' | 'h2';
 }
 
-const { title, id } = Astro.props;
+const { title, id, as: Tag = 'h2' } = Astro.props;
 ---
 
 <div class="mb-10 flex items-center gap-4">
-  <h2 id={`${id}-heading`} class="font-mono text-sm font-medium tracking-wide text-accent">{title}</h2>
+  <Tag id={`${id}-heading`} class="font-mono text-sm font-medium tracking-wide text-accent">{title}</Tag>
   <span class="h-px flex-1 bg-border" aria-hidden="true"></span>
   <slot />
 </div>

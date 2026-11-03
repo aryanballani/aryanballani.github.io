@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
-import { sections, site, socials } from '../data/site';
+import { nav, site, socials } from '../data/site';
 
 type Command = {
   label: string;
@@ -16,11 +16,12 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 const groups: { heading: string; commands: Command[] }[] = [
   {
     heading: 'Navigate',
-    commands: sections.map((s) => ({
-      label: s.id === 'experience' ? 'XP++ (Experience)' : s.label,
-      icon: 'lucide:hash',
+    commands: nav.map((item) => ({
+      label: item.label,
+      icon: 'lucide:corner-down-right',
       action: 'go',
-      value: `#${s.id}`,
+      value: item.href,
+      keywords: 'keywords' in item ? item.keywords : undefined,
     })),
   },
   {
@@ -36,7 +37,7 @@ const groups: { heading: string; commands: Command[] }[] = [
     heading: 'Projects',
     commands: projects.map((p) =>
       p.data.private
-        ? { label: p.data.title, icon: 'lucide:lock', action: 'go' as const, value: '#projects', keywords: p.data.tech.join(' ') }
+        ? { label: p.data.title, icon: 'lucide:lock', action: 'go' as const, value: '/projects/', keywords: p.data.tech.join(' ') }
         : { label: p.data.title, icon: 'lucide:folder-git-2', action: 'open' as const, value: p.data.href ?? p.data.repo, keywords: p.data.tech.join(' ') },
     ),
   },
@@ -195,8 +196,15 @@ let index = 0;
     dialog.close();
 
     if (action === 'go') {
-      document.querySelector(value!)?.scrollIntoView({ behavior: 'smooth' });
-      history.replaceState(null, '', value);
+      const url = new URL(value!, location.href);
+      if (url.pathname !== location.pathname) {
+        location.href = url.href;
+      } else if (url.hash) {
+        document.querySelector(url.hash)?.scrollIntoView({ behavior: 'smooth' });
+        history.replaceState(null, '', url.hash);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     } else if (action === 'open') {
       window.open(value, '_blank', 'noopener');
     } else if (action === 'copy-email') {
