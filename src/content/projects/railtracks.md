@@ -1,11 +1,11 @@
 ---
 title: Railtracks
-summary: An open-source agentic framework for building resilient agentic systems, built from scratch at Railtown AI.
+summary: Railtown AI's open-source Python framework for building AI agents. Core contributor since v0.1 (#2 by commits).
 highlights:
-  - Pub-sub, microservices architecture used by 20+ developers; cuts LLM integration complexity by ~40%
-  - Led the backend migration from LlamaIndex to LiteLLM with zero service interruption
-  - 200+ unit and integration tests at 92% coverage, wired into CI/CD
-tech: [Python, LiteLLM, AsyncIO, Pytest]
+  - Designed the decision-model primitive (rt.decision_node / rt.decisions)
+  - Led the LLM layer's migration off LlamaIndex; added streaming
+  - Built human-in-the-loop pre- and post-verifier middleware
+tech: [Python, LiteLLM, Pydantic, pytest]
 logo: python
 year: 2025
 order: 1

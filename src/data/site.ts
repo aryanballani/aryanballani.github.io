@@ -27,9 +27,9 @@ export const nav = [
 
 export const skills = [
   { group: 'Languages', items: ['Python', 'TypeScript', 'Java', 'C', 'C++', 'SQL', 'R', 'Kotlin'] },
-  { group: 'ML & Data', items: ['PyTorch', 'scikit-learn', 'NumPy', 'Pandas', 'NLTK', 'XGBoost', 'LiteLLM'] },
-  { group: 'Frameworks', items: ['FastAPI', 'Flask', 'React', 'Next.js', 'Vue.js', 'GraphQL'] },
-  { group: 'Infra & Data', items: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'PostgreSQL', 'MongoDB', 'Redis', 'Spark'] },
+  { group: 'ML & Data', items: ['LLM agents', 'RAG', 'LLM evals', 'LiteLLM', 'PyTorch', 'scikit-learn', 'NumPy', 'Pandas', 'NLTK', 'XGBoost'] },
+  { group: 'Frameworks', items: ['FastAPI', 'Pydantic', 'Flask', 'Streamlit', 'React', 'Next.js', 'Vue.js', 'GraphQL'] },
+  { group: 'Infra & Data', items: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'PostgreSQL', 'pgvector', 'MongoDB', 'Redis', 'Spark'] },
   { group: 'Tooling', items: ['Git', 'GitHub Actions', 'Azure Pipelines', 'Jenkins', 'Pytest', 'Selenium'] },
 ] as const;
 

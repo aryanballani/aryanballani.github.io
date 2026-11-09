@@ -9,6 +9,5 @@ tech: [TypeScript, Node.js, REST]
 logo: typescript
 year: 2024
 order: 7
-featured: true
 demo: https://www.youtube.com/watch?v=ZKsdiXBnN_M
 ---

@@ -13,7 +13,9 @@ links:
   - label: Work GitHub
     href: https://github.com/Aryan-Railtown
 highlights:
-  - Built and open-sourced the Railtracks agent framework, now used by 20+ developers
-  - Data ingestion pipeline over 10K+ commits powering Root Cause Analysis and Commit Summarizer tools
-  - Dockerized SWE-bench benchmarking pipeline for evaluating internal models
+  - Core contributor (#2 by commits) to Railtracks, Railtown's open-source agent framework; 56 merged PRs across 24 releases
+  - Designed its decision-model primitive and human-in-the-loop verifiers, and led the LLM layer's migration off LlamaIndex
+  - Built a RAG documentation agent solo in two weeks, with LLM-as-judge evals
+  - Redesigned retrieval for a production AI matching agent for an enterprise client
+  - Reviewed 65 teammates' PRs
 ---

@@ -37,12 +37,23 @@ const more = personal.filter((p) => !p.data.featured);
         </h3>
         <ul class="divide-y divide-border border-y border-border">
           {internal.map(({ data }) => (
-            <li class="grid gap-x-4 gap-y-1 py-4 sm:grid-cols-[12rem_1fr]">
+            <li class="grid gap-x-4 gap-y-1 py-5 sm:grid-cols-[12rem_1fr]">
               <span class="font-medium">{data.title}</span>
-              <span class="text-sm text-muted">
-                {data.summary}
-                {data.highlights.length > 0 && <span class="text-text/80"> {data.highlights.join('. ')}.</span>}
-              </span>
+              <div class="text-sm text-muted">
+                <p>{data.summary}</p>
+                {data.highlights.length > 0 && (
+                  <ul class="mt-2 space-y-1">
+                    {data.highlights.map((h) => (
+                      <li class="relative pl-4 before:absolute before:top-[0.6em] before:left-0 before:size-1 before:rounded-full before:bg-accent/60">
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <ul class="mt-2.5 flex flex-wrap gap-1.5" aria-label="Tech stack">
+                  {data.tech.map((t) => <li class="rounded-md bg-accent-soft px-2 py-0.5 font-mono text-[0.7rem] text-accent">{t}</li>)}
+                </ul>
+              </div>
             </li>
           ))}
         </ul>
@@ -71,28 +82,37 @@ const more = personal.filter((p) => !p.data.featured);
       <>
         <h3 class="mt-14 mb-3 font-mono text-xs tracking-wide text-muted">More projects</h3>
         <ul class="divide-y divide-border border-y border-border">
-          {more.map(({ data }) => (
+          {more.map(({ data }) => {
+            const link = data.href ?? data.demo ?? data.repo;
+            // Prototypes without a public link render as a plain row
+            const Row = link ? 'a' : 'div';
+            return (
             <li>
-              <a
-                href={data.href ?? data.demo ?? data.repo}
-                target="_blank"
-                rel="noopener"
+              <Row
+                href={link}
+                target={link ? '_blank' : undefined}
+                rel={link ? 'noopener' : undefined}
                 class="group grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 py-4 sm:grid-cols-[12rem_1fr_auto]"
               >
-                <span class="col-start-1 row-start-1 font-medium transition-colors group-hover:text-accent">{data.title}</span>
+                <span class:list={['col-start-1 row-start-1 font-medium transition-colors', link && 'group-hover:text-accent']}>{data.title}</span>
                 <span class="col-span-2 col-start-1 row-start-2 text-sm text-muted sm:col-span-1 sm:col-start-2 sm:row-start-1">
                   {data.summary}
                 </span>
                 <span class="col-start-2 row-start-1 flex items-center gap-2 font-mono text-xs text-muted tabular-nums sm:col-start-3">
                   {data.year}
-                  <Icon
-                    name="lucide:arrow-up-right"
-                    class="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
-                  />
+                  {link ? (
+                    <Icon
+                      name="lucide:arrow-up-right"
+                      class="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
+                    />
+                  ) : (
+                    <span class="rounded border border-border px-1 text-[0.6rem]" title="Local prototype, no public repo">proto</span>
+                  )}
                 </span>
-              </a>
+              </Row>
             </li>
-          ))}
+            );
+          })}
         </ul>
       </>
     )
