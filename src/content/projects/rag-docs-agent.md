@@ -6,8 +6,6 @@ highlights:
   - Retrieval-first Railtracks agent with prompt-injection guardrails and a sandboxed snippet tool
   - LLM-as-judge evals; the latest run scored 6/6 grounded and helpful at ~$0.003 per answer
 tech: [Python, Railtracks, Postgres, pgvector, FastAPI, Streamlit]
-logo: python
-year: 2026
 order: 20
 group: railtown
 internal: true

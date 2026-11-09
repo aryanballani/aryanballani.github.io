@@ -6,11 +6,8 @@ highlights:
   - Led the LLM layer's migration off LlamaIndex; added streaming
   - Built human-in-the-loop pre- and post-verifier middleware
 tech: [Python, LiteLLM, Pydantic, pytest]
-logo: python
-year: 2025
 order: 1
 featured: true
 group: railtown
-href: https://docs.railtracks.org/
 repo: https://github.com/RailtownAI/railtracks
 ---

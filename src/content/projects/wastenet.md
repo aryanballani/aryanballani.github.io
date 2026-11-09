@@ -6,9 +6,6 @@ highlights:
   - 10+ REST endpoints on Flask with encrypted credentials
   - MongoDB schemas designed for fast AI-driven filtering
 tech: [React Native, Flask, AWS Bedrock, MongoDB]
-logo: react-native
-year: 2024
 order: 5
-featured: true
 repo: https://github.com/aryanballani/WasteNet-Mobile-App
 ---

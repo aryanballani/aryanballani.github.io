@@ -22,8 +22,8 @@ Every page shares `src/layouts/Page.astro` (nav, footer, ⌘K palette). Nav link
 
 | What | Where |
 |---|---|
-| Projects | `src/content/projects/*.md`, one file per project. `featured: true` gets a full card; the rest go in "More projects". `order` sets position. Links: `href` (live/docs), `demo` (video), `repo`. `image` adds a screenshot to the card (put files in `src/assets/projects/`). `private: "<message>"` makes the card open a dialog instead of a link. |
-| Railtown work | `group: railtown` on a project puts it under "At Railtown AI"; add `internal: true` for closed-source work (no links). The Railtracks case study (stats, PRs) lives in `src/data/railtracks.ts`; bump `asOf` when refreshing numbers. |
+| Projects | `src/content/projects/*.md`, one file per project. `featured: true` gets a full card; the rest go in "More projects". `order` sets position. Each gets **Demo** and **Code** buttons from `demo` (video, live site or PDF; set `demoLabel: Report` for write-ups) and `repo`. `image` adds a screenshot to the card (put files in `src/assets/projects/`). `private: "<message>"` makes the card open a dialog instead of a link. |
+| Railtown work | `group: railtown` on a project puts it under "At Railtown AI"; add `internal: true` for closed-source work (no links). The Railtracks case study (stats, PRs) lives in `src/data/railtracks.ts`; bump `asOf` there when refreshing numbers (it isn't shown on the site). |
 | GitHub activity strip | `src/data/activity.json`, combined from both GitHub accounts. Refreshed automatically on every deploy; run `npm run activity` to refresh locally. |
 | Experience | `src/content/experience/*.md` (omit `end` for "Present"; `links` adds proof links under a role) |
 | Skills, socials, email, birth date | `src/data/site.ts` |
@@ -43,6 +43,5 @@ Keep these alive when changing things:
 4. The Rubik's cube PB line
 5. The experience section is called **XP++**
 6. Dep2Phrase's card says the repo is private and a paper is in the works
-7. Hovering a project card blurs it and reveals the tech logo (`ProjectCard.astro`)
-8. The AB logo (hand-made, `src/assets/nav-logo.svg`) grows on hover and is the favicon
-9. ⌘K / Ctrl+K / `/` opens the command palette (`CommandPalette.astro`)
+7. The AB logo (hand-made, `src/assets/nav-logo.svg`) grows on hover and is the favicon
+8. ⌘K / Ctrl+K / `/` opens the command palette (`CommandPalette.astro`)

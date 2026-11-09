@@ -6,9 +6,9 @@ highlights:
   - Gemini, OpenAI, Claude or local Ollama models
   - 131 offline tests; CI on Windows, macOS and Linux; one-line installers
 tech: [Python, Railtracks, LiteLLM]
-logo: python
-year: 2026
 order: 2.5
 featured: true
 repo: https://github.com/Aryan-Railtown/terminal_helper
+image: ../../assets/projects/sage.png
+imageAlt: sage answering questions in PowerShell and asking for approval before opening a config file
 ---

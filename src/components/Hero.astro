@@ -4,7 +4,7 @@ import { Icon } from 'astro-icon/components';
 import AgeTicker from './AgeTicker.astro';
 import Dialog from './Dialog.astro';
 import profile from '../assets/profile.jpg';
-import { isExternal, site, socials } from '../data/site';
+import { isExternal, resumes, site, socials } from '../data/site';
 
 const facts = [
   { icon: 'lucide:map-pin', text: 'Vancouver, BC, Canada' },
@@ -80,14 +80,21 @@ const facts = [
 
   <Dialog id="clickbait" label="Resume">
     <p class="text-lg leading-relaxed text-balance">You have been clickbaited into viewing my Resume</p>
-    <a
-      href={site.resume}
-      target="_blank"
-      rel="noopener"
-      class="mt-5 inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-bg transition-opacity hover:opacity-90"
-    >
-      View Now →
-    </a>
+    <p class="mt-4 text-sm text-muted">View Now →</p>
+    <div class="mt-3 flex flex-wrap justify-center gap-2">
+      {
+        resumes.map((r) => (
+          <a
+            href={r.href}
+            target="_blank"
+            rel="noopener"
+            class="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-bg transition-opacity hover:opacity-90"
+          >
+            {r.label}
+          </a>
+        ))
+      }
+    </div>
   </Dialog>
 </section>
 

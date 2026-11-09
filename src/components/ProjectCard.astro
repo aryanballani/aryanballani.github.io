@@ -3,54 +3,25 @@ import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import Dialog from './Dialog.astro';
-import { techLogo } from '../lib/tech-logos';
+import ProjectButtons from './ProjectButtons.astro';
 
 interface Props {
   project: CollectionEntry<'projects'>;
 }
 
 const { project } = Astro.props;
-const { title, summary, highlights, tech, logo, year, href, demo, repo, image, imageAlt, private: privateNote } = project.data;
-const primary = href ?? demo ?? repo;
+const { title, summary, highlights, tech, image, imageAlt, private: privateNote } = project.data;
 const dialogId = `private-${project.id}`;
-const links = [
-  href && { label: 'Live', href, icon: 'lucide:arrow-up-right' },
-  demo && { label: 'Demo', href: demo, icon: 'lucide:play' },
-  repo && { label: 'Code', href: repo, icon: 'simple-icons:github' },
-].filter((l) => !!l);
 ---
 
-<article
-  class="project-card group relative flex flex-col overflow-hidden rounded-xl border border-border bg-surface transition-[translate,border-color] duration-300 hover:-translate-y-1 hover:border-accent/40 focus-within:border-accent/40"
->
+<article class="project-card flex flex-col overflow-hidden rounded-xl border border-border bg-surface">
   {
     image && (
-      <Image
-        src={image}
-        alt={imageAlt ?? ''}
-        width={720}
-        class="card-content h-44 w-full border-b border-border object-cover object-top"
-      />
+      <Image src={image} alt={imageAlt ?? ''} width={720} class="h-44 w-full border-b border-border object-cover object-top" />
     )
   }
-  <div class="card-content flex flex-1 flex-col p-6">
-    <div class="flex items-baseline justify-between gap-4">
-      <h3 class="font-medium">
-        {
-          privateNote ? (
-            <button type="button" data-dialog-open={dialogId} class="stretched cursor-pointer text-left">
-              {title}
-            </button>
-          ) : (
-            <a href={primary} target="_blank" rel="noopener" class="stretched">
-              {title}
-            </a>
-          )
-        }
-      </h3>
-      <span class="font-mono text-xs text-muted tabular-nums">{year}</span>
-    </div>
-
+  <div class="flex flex-1 flex-col p-6">
+    <h3 class="font-medium">{title}</h3>
     <p class="mt-2 text-[0.94rem] leading-relaxed text-muted">{summary}</p>
 
     {
@@ -69,40 +40,24 @@ const links = [
       <ul class="flex flex-wrap gap-1.5" aria-label="Tech stack">
         {tech.map((t) => <li class="rounded-md bg-accent-soft px-2 py-0.5 font-mono text-[0.7rem] text-accent">{t}</li>)}
       </ul>
-      <div class="mt-4 flex items-center gap-4 border-t border-border pt-3 font-mono text-xs">
+      <div class="mt-4 border-t border-border pt-4">
         {
-          links.map((l) => (
-            <a
-              href={l.href}
-              target="_blank"
-              rel="noopener"
-              aria-label={`${title}: ${l.label}`}
-              class="relative z-10 flex items-center gap-1.5 text-muted transition-colors hover:text-accent"
+          privateNote ? (
+            <button
+              type="button"
+              data-dialog-open={dialogId}
+              class="flex cursor-pointer items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm text-muted transition-colors hover:border-accent/50 hover:text-accent"
             >
-              <Icon name={l.icon} class="size-3.5" />
-              {l.label}
-            </a>
-          ))
-        }
-        {
-          privateNote && (
-            <span class="flex items-center gap-1.5 text-muted">
               <Icon name="lucide:lock" class="size-3.5" />
               Private repo
-            </span>
+            </button>
+          ) : (
+            <ProjectButtons project={project} />
           )
         }
       </div>
     </div>
   </div>
-
-  <!-- Easter egg from the original site: on hover the card fades and its tech logo appears -->
-  <img
-    src={techLogo(logo)}
-    alt=""
-    aria-hidden="true"
-    class="tech-logo pointer-events-none absolute inset-0 m-auto size-2/5 max-h-32 object-contain opacity-0"
-  />
 </article>
 
 {
@@ -113,36 +68,3 @@ const links = [
     </Dialog>
   )
 }
-
-<style>
-  /* Whole card is clickable via the title link/button */
-  .stretched::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-  }
-
-  .card-content,
-  .tech-logo {
-    transition:
-      opacity 300ms ease,
-      filter 300ms ease,
-      scale 300ms ease;
-  }
-
-  .tech-logo {
-    scale: 0.9;
-  }
-
-  .project-card:hover .card-content,
-  .project-card:has(:focus-visible) .card-content {
-    opacity: 0.3;
-    filter: blur(2px);
-  }
-
-  .project-card:hover .tech-logo,
-  .project-card:has(:focus-visible) .tech-logo {
-    opacity: 1;
-    scale: 1;
-  }
-</style>

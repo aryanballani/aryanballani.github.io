@@ -4,10 +4,16 @@ export const site = {
   description:
     'Machine Learning Engineer at Railtown AI. Computer Science + Statistics at UBC. Projects, experience and everything I have built.',
   email: 'aryanballani@gmail.com',
+  // Primary (software) resume; keep this URL stable, it's linked from outside the site
   resume: '/resume/resume.pdf',
   // Drives the live age ticker easter egg
   birthDate: '2003-06-07T00:00:00',
 };
+
+export const resumes = [
+  { label: 'Software Engineering', href: '/resume/resume.pdf', keywords: 'swe cv pdf' },
+  { label: 'Data Engineering', href: '/resume/resume-data-engineering.pdf', keywords: 'de data cv pdf' },
+] as const;
 
 export const socials = [
   { label: 'GitHub', href: 'https://github.com/aryanballani', icon: 'simple-icons:github' },

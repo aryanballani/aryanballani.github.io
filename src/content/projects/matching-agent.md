@@ -6,8 +6,6 @@ highlights:
   - Fixed silent failures (swallowed errors, truncated results and queries); recall of known-good matches 38% → 46% on a 30-item set
   - Moved scoring to calibrated Railtracks decisions and cut LLM calls per re-match from 5 to 2 with caching
 tech: [Python, Railtracks, FastAPI, pgvector, Azure]
-logo: python
-year: 2026
 order: 21
 group: railtown
 internal: true

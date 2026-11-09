@@ -1,0 +1,55 @@
+---
+// Nav "Resume" button: a small dropdown offering both resumes.
+import { Icon } from 'astro-icon/components';
+import { resumes } from '../data/site';
+---
+
+<details class="resume-menu relative">
+  <summary
+    class="flex cursor-pointer list-none items-center gap-1 rounded-md border border-accent/40 px-3 py-1.5 text-sm text-accent transition-colors select-none hover:bg-accent hover:text-bg [&::-webkit-details-marker]:hidden"
+  >
+    Resume
+    <Icon name="lucide:chevron-down" class="chevron size-3.5 transition-transform" />
+  </summary>
+  <ul
+    class="absolute right-0 z-50 mt-2 w-60 overflow-hidden rounded-xl border border-border bg-surface p-1.5 shadow-xl"
+    aria-label="Resumes"
+  >
+    {
+      resumes.map((r) => (
+        <li>
+          <a
+            href={r.href}
+            target="_blank"
+            rel="noopener"
+            class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:bg-accent-soft hover:text-text"
+          >
+            <Icon name="lucide:file-text" class="size-4 shrink-0 text-accent" />
+            {r.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</details>
+
+<style>
+  .resume-menu[open] .chevron {
+    rotate: 180deg;
+  }
+</style>
+
+<script>
+  // Close on outside click, Escape, or after picking a resume
+  const menu = document.querySelector<HTMLDetailsElement>('.resume-menu')!;
+  document.addEventListener('click', (e) => {
+    if (menu.open && !menu.contains(e.target as Node)) menu.open = false;
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.open) {
+      menu.open = false;
+      menu.querySelector('summary')!.focus();
+    }
+  });
+  menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => (menu.open = false)));
+</script>

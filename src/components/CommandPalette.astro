@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
-import { nav, site, socials } from '../data/site';
+import { nav, resumes, site, socials } from '../data/site';
 
 type Command = {
   label: string;
@@ -27,7 +27,7 @@ const groups: { heading: string; commands: Command[] }[] = [
   {
     heading: 'Links',
     commands: [
-      { label: 'Resume', icon: 'lucide:file-text', action: 'open', value: site.resume, keywords: 'cv pdf' },
+      ...resumes.map((r) => ({ label: `Resume: ${r.label}`, icon: 'lucide:file-text', action: 'open' as const, value: r.href, keywords: r.keywords })),
       ...socials
         .filter((s) => s.label !== 'Email')
         .map((s) => ({ label: s.label, icon: s.icon, action: 'open' as const, value: s.href })),
@@ -36,9 +36,9 @@ const groups: { heading: string; commands: Command[] }[] = [
   {
     heading: 'Projects',
     commands: projects.map((p) =>
-      p.data.private || p.data.internal || !(p.data.href ?? p.data.demo ?? p.data.repo)
+      p.data.private || p.data.internal || !(p.data.demo ?? p.data.repo)
         ? { label: p.data.title, icon: 'lucide:lock', action: 'go' as const, value: '/projects/', keywords: p.data.tech.join(' ') }
-        : { label: p.data.title, icon: 'lucide:folder-git-2', action: 'open' as const, value: p.data.href ?? p.data.demo ?? p.data.repo, keywords: p.data.tech.join(' ') },
+        : { label: p.data.title, icon: 'lucide:folder-git-2', action: 'open' as const, value: p.data.demo ?? p.data.repo, keywords: p.data.tech.join(' ') },
     ),
   },
   {

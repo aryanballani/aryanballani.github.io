@@ -6,8 +6,6 @@ highlights:
   - RoBERTa embeddings + MLP classifiers to scale chunking across datasets
   - Built with a professor to align the implementation with linguistic theory
 tech: [Python, NLTK, Penn Treebank, RoBERTa]
-logo: python
-year: 2024
 order: 6
 featured: true
 private: Project currently in a private repository. A research paper is in the works.

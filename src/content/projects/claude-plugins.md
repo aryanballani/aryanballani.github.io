@@ -4,8 +4,6 @@ summary: Railtown's internal Claude Code plugin marketplace, plus an Azure DevOp
 highlights:
   - Every write is a dry run until a human approves that action; least-privilege tokens
 tech: [Python, Claude Code, Azure DevOps]
-logo: python
-year: 2026
 order: 22
 group: railtown
 internal: true

@@ -6,9 +6,6 @@ highlights:
   - Vue.js search with live keyword filtering and sentiment charts
   - Privacy-preserving chatbot on LLaMA 3.2 via Ollama, fully offline
 tech: [Python, BERT, NLTK, Vue.js, Ollama]
-logo: vue
-year: 2024
 order: 4
-featured: true
 repo: https://github.com/aryanballani/UBCLens-open-source
 ---

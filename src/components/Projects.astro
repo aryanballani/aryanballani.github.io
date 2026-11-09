@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
+import ProjectButtons from './ProjectButtons.astro';
 import ProjectCard from './ProjectCard.astro';
 import RailtracksCaseStudy from './RailtracksCaseStudy.astro';
 import SectionHeading from './SectionHeading.astro';
@@ -82,37 +83,23 @@ const more = personal.filter((p) => !p.data.featured);
       <>
         <h3 class="mt-14 mb-3 font-mono text-xs tracking-wide text-muted">More projects</h3>
         <ul class="divide-y divide-border border-y border-border">
-          {more.map(({ data }) => {
-            const link = data.href ?? data.demo ?? data.repo;
-            // Prototypes without a public link render as a plain row
-            const Row = link ? 'a' : 'div';
-            return (
-            <li>
-              <Row
-                href={link}
-                target={link ? '_blank' : undefined}
-                rel={link ? 'noopener' : undefined}
-                class="group grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 py-4 sm:grid-cols-[12rem_1fr_auto]"
-              >
-                <span class:list={['col-start-1 row-start-1 font-medium transition-colors', link && 'group-hover:text-accent']}>{data.title}</span>
-                <span class="col-span-2 col-start-1 row-start-2 text-sm text-muted sm:col-span-1 sm:col-start-2 sm:row-start-1">
-                  {data.summary}
-                </span>
-                <span class="col-start-2 row-start-1 flex items-center gap-2 font-mono text-xs text-muted tabular-nums sm:col-start-3">
-                  {data.year}
-                  {link ? (
-                    <Icon
-                      name="lucide:arrow-up-right"
-                      class="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
-                    />
-                  ) : (
-                    <span class="rounded border border-border px-1 text-[0.6rem]" title="Local prototype, no public repo">proto</span>
-                  )}
-                </span>
-              </Row>
+          {more.map((project) => (
+            <li class="grid grid-cols-[1fr_auto] items-start gap-x-4 gap-y-1.5 py-4 sm:grid-cols-[12rem_1fr_auto]">
+              <span class="col-start-1 row-start-1 font-medium">{project.data.title}</span>
+              <span class="col-span-2 col-start-1 row-start-2 text-sm text-muted sm:col-span-1 sm:col-start-2 sm:row-start-1">
+                {project.data.summary}
+              </span>
+              <div class="col-start-2 row-start-1 sm:col-start-3">
+                {project.data.demo || project.data.repo ? (
+                  <ProjectButtons project={project} compact />
+                ) : (
+                  <span class="rounded border border-border px-1.5 py-0.5 font-mono text-[0.65rem] text-muted" title="Local prototype, no public repo">
+                    prototype
+                  </span>
+                )}
+              </div>
             </li>
-            );
-          })}
+          ))}
         </ul>
       </>
     )

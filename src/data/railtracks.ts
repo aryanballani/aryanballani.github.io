@@ -1,5 +1,5 @@
 // Railtracks case study on /projects/. Numbers come from the Nov 2026 research pass over git
-// history and the GitHub API; update `asOf` when refreshing them.
+// history and the GitHub API. `asOf` isn't shown on the site; it records when to refresh them.
 // Note: GitHub's contributor graph shows Aryan as #1, but that's because another maintainer's
 // commits are split across emails. Merged, he's #2, so don't change this to #1.
 const repo = 'https://github.com/RailtownAI/railtracks';
