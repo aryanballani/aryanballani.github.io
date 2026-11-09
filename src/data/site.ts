@@ -11,6 +11,8 @@ export const site = {
 
 export const socials = [
   { label: 'GitHub', href: 'https://github.com/aryanballani', icon: 'simple-icons:github' },
+  // Work account at Railtown AI: most day-to-day commits live here
+  { label: 'Railtown GitHub', href: 'https://github.com/Aryan-Railtown', icon: 'simple-icons:github' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/aryanballani/', icon: 'simple-icons:linkedin' },
   { label: 'Instagram', href: 'https://www.instagram.com/ayee_bee_jr/', icon: 'simple-icons:instagram' },
   { label: 'Email', href: `mailto:${site.email}`, icon: 'lucide:mail' },

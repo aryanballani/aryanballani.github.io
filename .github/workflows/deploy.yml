@@ -22,6 +22,8 @@ jobs:
       - uses: withastro/action@v6
         with:
           node-version: 24
+          # Refresh the GitHub activity snapshot (keeps the committed one if GitHub is unreachable)
+          build-cmd: node scripts/fetch-activity.mjs && npm run build
 
   deploy:
     needs: build

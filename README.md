@@ -22,8 +22,10 @@ Every page shares `src/layouts/Page.astro` (nav, footer, ⌘K palette). Nav link
 
 | What | Where |
 |---|---|
-| Projects | `src/content/projects/*.md`, one file per project. `featured: true` gets a full card; the rest go in "More projects". `order` sets position. `private: "<message>"` makes the card open a dialog instead of a link. |
-| Experience | `src/content/experience/*.md` (omit `end` for "Present") |
+| Projects | `src/content/projects/*.md`, one file per project. `featured: true` gets a full card; the rest go in "More projects". `order` sets position. Links: `href` (live/docs), `demo` (video), `repo`. `image` adds a screenshot to the card (put files in `src/assets/projects/`). `private: "<message>"` makes the card open a dialog instead of a link. |
+| Railtown work | `group: railtown` on a project puts it under "At Railtown AI"; add `internal: true` for closed-source work (no links). The Railtracks case study (stats, PRs) lives in `src/data/railtracks.ts`; bump `asOf` when refreshing numbers. |
+| GitHub activity strip | `src/data/activity.json`, combined from both GitHub accounts. Refreshed automatically on every deploy; run `npm run activity` to refresh locally. |
+| Experience | `src/content/experience/*.md` (omit `end` for "Present"; `links` adds proof links under a role) |
 | Skills, socials, email, birth date | `src/data/site.ts` |
 | Hero facts / tagline | `src/components/Hero.astro` |
 | Resume | `public/resume/resume.pdf` (keep the filename; it's linked from several places) |

@@ -10,5 +10,8 @@ logo: kotlin
 year: 2026
 order: 2
 featured: true
+demo: https://drive.google.com/drive/folders/1FqgYpMiQj_5vOK4IQp4g-8P_Rgs6xoPw
 repo: https://github.com/aryanballani/PiLOT
+image: ../../assets/projects/pilot.jpg
+imageAlt: PiLOT's Android app asking for accessibility, overlay and microphone permissions
 ---

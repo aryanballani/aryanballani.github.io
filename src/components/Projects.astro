@@ -2,24 +2,65 @@
 import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import ProjectCard from './ProjectCard.astro';
+import RailtracksCaseStudy from './RailtracksCaseStudy.astro';
 import SectionHeading from './SectionHeading.astro';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
-const featured = projects.filter((p) => p.data.featured);
-const more = projects.filter((p) => !p.data.featured);
+const internal = projects.filter((p) => p.data.group === 'railtown' && p.data.internal);
+const personal = projects.filter((p) => p.data.group === 'personal');
+const featured = personal.filter((p) => p.data.featured);
+const more = personal.filter((p) => !p.data.featured);
 ---
 
 <section id="projects" aria-labelledby="projects-heading" class="pt-14 pb-8 sm:pt-20">
-  <SectionHeading as="h1" id="projects" title="Projects">
+  <SectionHeading as="h1" id="projects" title="Projects" />
+
+  <div class="mb-6 flex flex-wrap items-baseline justify-between gap-2">
+    <h2 class="text-lg font-medium">At Railtown AI</h2>
+    <a
+      href="https://github.com/Aryan-Railtown"
+      target="_blank"
+      rel="noopener"
+      class="flex items-center gap-1 font-mono text-xs text-muted transition-colors hover:text-accent"
+    >
+      Work GitHub <Icon name="lucide:arrow-up-right" class="size-3.5" />
+    </a>
+  </div>
+
+  <RailtracksCaseStudy />
+
+  {
+    internal.length > 0 && (
+      <>
+        <h3 class="mt-10 mb-3 flex items-center gap-2 font-mono text-xs tracking-wide text-muted">
+          <Icon name="lucide:lock" class="size-3.5" /> Internal work (closed source)
+        </h3>
+        <ul class="divide-y divide-border border-y border-border">
+          {internal.map(({ data }) => (
+            <li class="grid gap-x-4 gap-y-1 py-4 sm:grid-cols-[12rem_1fr]">
+              <span class="font-medium">{data.title}</span>
+              <span class="text-sm text-muted">
+                {data.summary}
+                {data.highlights.length > 0 && <span class="text-text/80"> {data.highlights.join('. ')}.</span>}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  <div class="mt-20 mb-6 flex flex-wrap items-baseline justify-between gap-2">
+    <h2 class="text-lg font-medium">Personal &amp; school</h2>
     <a
       href="https://github.com/aryanballani"
       target="_blank"
       rel="noopener"
       class="flex items-center gap-1 font-mono text-xs text-muted transition-colors hover:text-accent"
     >
-      All on GitHub <Icon name="lucide:arrow-up-right" class="size-3.5" />
+      Personal GitHub <Icon name="lucide:arrow-up-right" class="size-3.5" />
     </a>
-  </SectionHeading>
+  </div>
 
   <div class="grid gap-4 sm:grid-cols-2">
     {featured.map((project) => <ProjectCard project={project} />)}
@@ -33,7 +74,7 @@ const more = projects.filter((p) => !p.data.featured);
           {more.map(({ data }) => (
             <li>
               <a
-                href={data.href ?? data.repo}
+                href={data.href ?? data.demo ?? data.repo}
                 target="_blank"
                 rel="noopener"
                 class="group grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 py-4 sm:grid-cols-[12rem_1fr_auto]"

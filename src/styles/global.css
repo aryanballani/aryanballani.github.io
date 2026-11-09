@@ -25,9 +25,10 @@
   --border: #e6e3d6;
   --text: #1a1a17;
   --muted: #6b6a5f;
-  --accent: #8a7d1e;
-  --accent-soft: rgb(138 125 30 / 0.1);
-  --glow: rgb(173 163 59 / 0.12);
+  /* Darker than the dark-mode gold so text passes WCAG AA (5.5:1 on --bg) */
+  --accent: #6f6416;
+  --accent-soft: rgb(111 100 22 / 0.09);
+  --glow: rgb(173 163 59 / 0.06);
   color-scheme: light;
 }
 

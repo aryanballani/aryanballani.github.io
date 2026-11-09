@@ -36,9 +36,9 @@ const groups: { heading: string; commands: Command[] }[] = [
   {
     heading: 'Projects',
     commands: projects.map((p) =>
-      p.data.private
+      p.data.private || p.data.internal
         ? { label: p.data.title, icon: 'lucide:lock', action: 'go' as const, value: '/projects/', keywords: p.data.tech.join(' ') }
-        : { label: p.data.title, icon: 'lucide:folder-git-2', action: 'open' as const, value: p.data.href ?? p.data.repo, keywords: p.data.tech.join(' ') },
+        : { label: p.data.title, icon: 'lucide:folder-git-2', action: 'open' as const, value: p.data.href ?? p.data.demo ?? p.data.repo, keywords: p.data.tech.join(' ') },
     ),
   },
   {

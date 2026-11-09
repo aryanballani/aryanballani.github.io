@@ -10,6 +10,6 @@ logo: python
 year: 2026
 order: 3
 featured: true
-href: https://youtube.com/shorts/Cf38NwVQo1U
+demo: https://youtube.com/shorts/Cf38NwVQo1U
 repo: https://github.com/aryanballani/GlideCart
 ---

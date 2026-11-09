@@ -1,0 +1,57 @@
+---
+// One thin bar per week of combined GitHub activity across both accounts.
+// Data comes from src/data/activity.json (refreshed by scripts/fetch-activity.mjs on deploy).
+import activity from '../data/activity.json';
+import { formatMonth } from '../lib/format';
+
+const weeks: { start: string; count: number }[] = [];
+activity.days.forEach((day, i) => {
+  if (i % 7 === 0) weeks.push({ start: day.date, count: 0 });
+  weeks[weeks.length - 1].count += day.count;
+});
+
+// sqrt keeps one huge week from flattening the rest
+const max = Math.sqrt(Math.max(1, ...weeks.map((w) => w.count)));
+const height = (count: number) => (count === 0 ? 6 : 14 + (Math.sqrt(count) / max) * 86);
+
+const total = activity.days.reduce((sum, d) => sum + d.count, 0);
+const first = activity.days[0].date.slice(0, 7);
+const last = activity.days[activity.days.length - 1].date.slice(0, 7);
+---
+
+<figure class="mt-14 rounded-xl border border-border px-5 pt-4 pb-3">
+  <figcaption class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-sm">
+    <span>
+      <span class="font-mono text-accent tabular-nums">{total.toLocaleString('en')}</span>
+      <span class="text-muted"> GitHub contributions in the last year</span>
+    </span>
+    <span class="font-mono text-[0.68rem] text-muted">
+      {
+        activity.accounts.map((a, i) => (
+          <>
+            {i > 0 && ' + '}
+            <a href={`https://github.com/${a.login}`} target="_blank" rel="noopener" class="hover:text-accent">
+              {a.login}
+            </a>
+          </>
+        ))
+      }
+    </span>
+  </figcaption>
+
+  <div class="mt-4 flex h-12 items-end gap-[2px]" role="img" aria-label={`Weekly contributions from ${formatMonth(first)} to ${formatMonth(last)}`}>
+    {
+      weeks.map((w) => (
+        <span
+          class="flex-1 rounded-[1px] bg-accent transition-opacity hover:opacity-100"
+          style={`height:${height(w.count)}%;opacity:${w.count === 0 ? 0.18 : 0.75}`}
+          title={`Week of ${w.start}: ${w.count} contribution${w.count === 1 ? '' : 's'}`}
+        />
+      ))
+    }
+  </div>
+  <div class="mt-1.5 flex justify-between font-mono text-[0.65rem] text-muted">
+    <span>{formatMonth(first)}</span>
+    <span>{formatMonth(last)}</span>
+  </div>
+</figure>
