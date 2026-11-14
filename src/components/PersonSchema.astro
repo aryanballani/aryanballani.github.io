@@ -1,0 +1,41 @@
+---
+// Schema.org JSON-LD for the home page: who the site is about, for search engines.
+// Every URL derives from `site` in astro.config.mjs, so a domain change updates it.
+import { getImage } from 'astro:assets';
+import profile from '../assets/profile.jpg';
+import { site, socials } from '../data/site';
+
+const url = new URL('/', Astro.site).href;
+const photo = await getImage({ src: profile, width: 600, format: 'jpg' });
+// Professional profiles only
+const sameAs = socials.filter((s) => s.label === 'GitHub' || s.label === 'LinkedIn').map((s) => s.href);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebSite', '@id': `${url}#website`, url, name: site.name },
+    {
+      '@type': 'ProfilePage',
+      '@id': url,
+      url,
+      name: site.title,
+      isPartOf: { '@id': `${url}#website` },
+      mainEntity: { '@id': `${url}#person` },
+    },
+    {
+      '@type': 'Person',
+      '@id': `${url}#person`,
+      name: site.name,
+      url,
+      image: new URL(photo.src, Astro.site).href,
+      jobTitle: site.jobTitle,
+      worksFor: { '@type': 'Organization', name: 'Railtown AI', url: 'https://railtown.ai' },
+      alumniOf: { '@type': 'CollegeOrUniversity', name: 'University of British Columbia', url: 'https://www.ubc.ca' },
+      homeLocation: { '@type': 'Place', name: 'Vancouver, BC, Canada' },
+      sameAs,
+    },
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

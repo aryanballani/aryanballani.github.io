@@ -4,7 +4,7 @@ import logo from '../assets/nav-logo.svg';
 import { site } from '../data/site';
 ---
 
-<Base title={`Page not found · ${site.name}`}>
+<Base title={`Page not found · ${site.name}`} noindex>
   <main class="mx-auto flex min-h-dvh max-w-md flex-col items-center justify-center px-6 text-center">
     <img src={logo.src} alt="" width="72" height="72" class="size-18" />
     <p class="mt-8 font-mono text-sm text-accent">404</p>

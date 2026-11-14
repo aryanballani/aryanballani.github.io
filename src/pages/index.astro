@@ -2,10 +2,12 @@
 import Page from '../layouts/Page.astro';
 import Experience from '../components/Experience.astro';
 import Hero from '../components/Hero.astro';
+import PersonSchema from '../components/PersonSchema.astro';
 import Skills from '../components/Skills.astro';
 ---
 
 <Page>
+  <PersonSchema slot="head" />
   <Hero />
   <Experience />
   <Skills />

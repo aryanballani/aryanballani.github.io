@@ -28,10 +28,22 @@ Every page shares `src/layouts/Page.astro` (nav, footer, ⌘K palette). Nav link
 | Experience | `src/content/experience/*.md` (omit `end` for "Present"; `links` adds proof links under a role) |
 | Skills, socials, email, birth date | `src/data/site.ts` |
 | Hero facts / tagline | `src/components/Hero.astro` |
-| Resume | `public/resume/resume.pdf` (keep the filename; it's linked from several places) |
-| Hover logo for a project card | `logo:` key → `src/assets/tech/<key>.svg` (add new keys to `techLogos` in `src/content.config.ts`) |
+| Resumes | `public/resume/resume.pdf` (software) and `public/resume/resume-data-engineering.pdf`. Keep the filenames; they're linked from outside the site. The list is `resumes` in `src/data/site.ts`. |
 
 Frontmatter is validated by the schemas in `src/content.config.ts`, so a typo fails the build instead of shipping.
+
+## SEO
+
+| What | Where |
+|---|---|
+| Title, description, job title | `site` in `src/data/site.ts` (`/projects/` sets its own in `src/pages/projects.astro`) |
+| Canonical / Open Graph tags | `src/layouts/Base.astro`. Pass `noindex` for pages that shouldn't be indexed (the 404 does). |
+| Person JSON-LD | `src/components/PersonSchema.astro`, home page only |
+| Sitemap, robots.txt | `@astrojs/sitemap` in `astro.config.mjs` and `src/pages/robots.txt.ts`, generated at build time |
+| Link-preview card | `public/og.png`, rendered from `scripts/og-image.html` with `npm run og` (uses Brave by default; set `BROWSER` to another Chromium path). Re-run after changing the photo or title. |
+| Search Console verification | Paste the HTML-tag token into `googleSiteVerification` in `src/data/site.ts` |
+
+**Custom domain:** every absolute URL (canonical, OG, JSON-LD, sitemap, robots.txt) comes from `site` in `astro.config.mjs`. When switching domains, change it there and set the domain under Settings → Pages (no `CNAME` file needed, since the site deploys through Actions).
 
 ## Easter eggs 🥚
 

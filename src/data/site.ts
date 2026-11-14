@@ -1,8 +1,12 @@
 export const site = {
   name: 'Aryan Ballani',
-  title: 'Aryan Ballani: ML & Software Engineer',
+  title: 'Aryan Ballani · Machine Learning & Software Engineer',
+  // Search snippet + link previews; keep it under ~160 characters and name-forward
   description:
-    'Machine Learning Engineer at Railtown AI. Computer Science + Statistics at UBC. Projects, experience and everything I have built.',
+    'Aryan Ballani is a Machine Learning Engineer at Railtown AI in Vancouver and a UBC Computer Science + Statistics grad who builds LLM agents and RAG systems.',
+  jobTitle: 'Machine Learning Engineer',
+  // Google Search Console "HTML tag" verification token (the content="…" value); empty = no tag
+  googleSiteVerification: '',
   email: 'aryanballani@gmail.com',
   // Primary (software) resume; keep this URL stable, it's linked from outside the site
   resume: '/resume/resume.pdf',

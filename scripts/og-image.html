@@ -1,0 +1,90 @@
+<!doctype html>
+<!-- Link-preview card (public/og.png). Render with `npm run og`. -->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: 'Geist';
+        src: url('../node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2') format('woff2');
+        font-weight: 100 900;
+      }
+      @font-face {
+        font-family: 'Geist Mono';
+        src: url('../node_modules/@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2') format('woff2');
+        font-weight: 100 900;
+      }
+      @font-face {
+        font-family: 'Anta';
+        src: url('../node_modules/@fontsource/anta/files/anta-latin-400-normal.woff2') format('woff2');
+      }
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+      body {
+        background: radial-gradient(circle at 78% 50%, rgb(200 185 80 / 0.12), transparent 45%), #0f0f0d;
+        color: #ecebe4;
+        font-family: 'Geist', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 96px;
+        border-top: 6px solid #c8b950;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-family: 'Anta', sans-serif;
+        font-size: 26px;
+        color: #8f8d80;
+      }
+      .brand img {
+        width: 44px;
+        height: 44px;
+      }
+      h1 {
+        margin-top: 44px;
+        font-size: 76px;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+      }
+      .role {
+        margin-top: 16px;
+        font-size: 34px;
+        color: #c8b950;
+      }
+      .meta {
+        margin-top: 40px;
+        font-family: 'Geist Mono', monospace;
+        font-size: 22px;
+        color: #8f8d80;
+      }
+      .photo {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow:
+          0 0 0 8px #0f0f0d,
+          0 0 0 12px rgb(200 185 80 / 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="brand"><img src="../src/assets/nav-logo.svg" alt="" />aryanballani</div>
+      <h1>Aryan Ballani</h1>
+      <p class="role">Machine Learning &amp; Software Engineer</p>
+      <p class="meta">Railtown AI · UBC CS + Stats · Vancouver</p>
+    </div>
+    <img class="photo" src="../src/assets/profile.jpg" alt="" />
+  </body>
+</html>
